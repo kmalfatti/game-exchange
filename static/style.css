@@ -360,8 +360,49 @@ i {
 .col2 img{
   width: 100%
 }
-
-
 /*===============*/
 /*    END ABOUT  */
 /*===============*/
+
+
+/*===============*/
+/*    SINGUP */
+/*===============*/
+.errorText{
+  color: red;
+  margin-top: 5px;
+}
+
+.form{
+  border: 5px solid black;
+  margin: 0 auto;
+  width: 50%;
+  min-width: 300px;
+  max-width: 600px;
+  background-color: rgb(222,222,222);
+  /*box-shadow: 5px 5px 5px #888888;*/
+}
+
+.form div{
+  margin-top: 25px;
+  text-align: center;
+}
+
+.form div input {
+  width: 75%;
+}
+
+#button{
+  color: white;
+  background-color: rgb(0,94,184);
+  border-radius: 5px;
+  height: 30px;
+  width: 50%;
+  margin-bottom: 25px;
+}
+/*===============*/
+/*   END SIGNUP  */
+/*===============*/
+
+
+
