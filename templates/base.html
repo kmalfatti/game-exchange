@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='style.css') }}">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="
+  https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.css">
+  <title>Base</title>
+</head>
+<body>
+<header>
+  <nav class="top-nav">
+    <div class="">
+      <span id="bars">&#9776;</span>
+      <ul>
+        
+      </ul>
+    </div>
+
+    <ul class="nav-list">
+      <li><a href="{{url_for('index')}}" id="logo">Game Exchange</a></li>
+      <li><a href="{{url_for('about')}}">About</a></li>
+      <li><a href="{{url_for('contact')}}">Contact</a></li>
+      <li><a href="{{url_for('search')}}">Search</a></li>
+    </ul>
+
+  <h1 id="mobileLogo"><a href="/">Game Exchange</a></h1>
+
+  <aside class="aside">
+    <ul>
+      <li>Log In</li>
+      <li><a href="{{url_for('signup')}}">Sign Up</a></li>
+    </ul>
+  </aside>
+  </nav>
+</header>
+
+
+  {% block content %}
+  {% endblock %}
+
+
+<footer>
+  <div class="icons">
+    <i class="fa fa-facebook-square fa-lg" aria-hidden="true"></i>
+    <i class="fa fa-twitter-square fa-lg" aria-hidden="true"></i>
+    <i class="fa fa-youtube-play fa-lg" aria-hidden="true"></i>
+  </div>
+  <ul class="footer-list">
+    <li>Careers</li>
+    <li>Partnerships</li>
+    <li>Support</li>
+    <li>Press</li>
+    <li>Feedback</li>
+  </ul>
+  <p id="copyright">&copy; 2016 &nbsp; The Game Exchange</p>
+</footer>
+</body>
+</html>
+

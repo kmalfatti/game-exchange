@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% block content %}
+  <main>
+      <div class="block-group welcome">
+        <div class="graybox">
+          <h1>Welcome to The Game Exchange!</h1>
+          <p>The worlds first platform where you can seemlessly trade video games with other players in your community!</p>
+          <input type="text" placeholder="Search games">
+          </div>
+      </div>
+    <div class="wrapper">
+      <div class="block-group margin">
+        <h3 class="title">What makes The Game Exchange great?</h3>
+        <div class="block view view-first">
+          <img src="../static/images/money.png" alt="Cashless Transaction">
+          <div class="mask">
+            <h3>Cashless Transaction</h3>
+            <!-- TODO Content -->
+            <p>No cash involved: Trade your games for other games that you want to play.</p>
+            <a href="{{url_for('about')}}#cashless" class="info">Read More</a>
+          </div>
+        </div>
+        <div class="block view view-first">
+          <img src="../static/images/star.png" alt="Star">
+          <div class="mask">
+            <h3>Rating System</h3>
+            <!-- TODO Content -->
+            <p>The rating system helps ensure accountability for all users.</p>
+            <a href="{{url_for('about')}}#rating" class="info">Read More</a>
+          </div>
+        </div>
+        <div class="block view view-first">
+          <img src="../static/images/cred.jpg" id="credImg" alt="Cred">
+          <div class="mask">
+            <h3>Cred</h3>
+            <p>Earn Cred every time you eachange a game and for referring your friends!</p>
+            <a href="{{url_for('about')}}#cred" class="info">Read More</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="block-group community-color">
+      <h3 class="title">Community</h3>
+      <p>The Game Exchange has brought together hundreds of like minded players, in the interest of saving money, making new friends, and having fun!</p>
+      <div class="community">
+      </div>
+    </div>
+
+    <div class="wrapper">
+      <div class="block-group">
+        <h3 class="title">Supported Platforms</h3>  
+        <div class="block view view-first">
+          <img src="../static/images/ps.png" alt="Playstation" id="ps">
+          <div class="mask">
+            <h3>Playstation</h3>
+            <p>Search for popular Playstation 3 and Playstation 4 titles!</p>
+            <a href="{{url_for('search')}}" class="info">Search</a>
+          </div>
+        </div>
+        <div class="block view view-first">
+          <img src="../static/images/xbox.jpg" alt="Xbox" id="xbox">
+          <div class="mask">
+            <h3>Xbox</h3>
+            <p>Search for popular Xbox 360 and Xbox One titles!</p>
+            <a href="{{url_for('search')}}" class="info">Search</a>
+          </div>
+        </div>
+        <div class="block view view-first">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Wii.svg/2000px-Wii.svg.png" alt="Wii" id="wii">
+          <div class="mask">
+            <h3>Wii</h3>
+            <p>Search for popular Wii and Wii U titles!</p>
+            <a href="{{url_for('search')}}" class="info">Search</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+
+{% endblock %}
