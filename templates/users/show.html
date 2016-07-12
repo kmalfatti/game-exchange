@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<main>
+  <div class="profWrapper">
+  <h3>{{user.username}}</h3>
+    <div class="leftProfile">
+      <div class="profPic">
+        <img src="{{user.image}}" alt="Photo of {{user.username}}">
+      </div>
+      <p><b>Memeber since: </b><em>{{user.date_joined.strftime('%m-%d-%Y')}}</em></p>
+      <p><b>Location: </b>{{user.location}}</p>
+      <p><b>Email: </b>{{user.email}}</p>
+    </div>
+    <div class="rightProfile">
+      <p><b>Bio: </b>{{user.bio}}</p>
+      <p><b>Games: </b></p>
+    </div>
+  </div>
+</main>
+
+
+{% endblock %}

@@ -1,6 +1,7 @@
-body {
+/** {
   margin: 0;
-}
+  padding: 0;
+}*/
 
 /*============ NAV =============*/
 
@@ -82,6 +83,10 @@ h1 {
   background-repeat: no-repeat;
 }
 
+.welcome{
+  margin-bottom: -90px;
+}
+
 .graybox {
   /*text-align: center;*/
   padding: 10px 50px 50px 50px;
@@ -112,12 +117,11 @@ h1 {
 }
 
 .title {
-  padding-top: 50px; 
   font-size: 2rem;
 }
-/*body{
-  background-color: rgb(222,222,222);
-}*/
+body{
+  /*background-color: rgb(222,222,222);*/
+}
 
 .community {
   height: 500px;
@@ -276,10 +280,9 @@ main {
 /*  Main Index  */
 .block-group {
   text-align: center;
-  margin-bottom: 170px;
+  margin-bottom: 200px;
   /*background-color: white;*/
 }
-
 
 .block {
   position: default;
@@ -309,12 +312,21 @@ a:hover{
 /*===============*/
 /*    FOOTER   */
 /*===============*/
+.wrapper{
+  min-height: 100%;
+  overflow: hidden;
+}
+
 footer {
   /*background-color: rgb(0,94,184);*/
   text-align: center;
   min-height: 100px;
   background: linear-gradient(rgb(0,94,184) 60%, rgba(0,0,0, .8));
+  width: 100%;
+  overflow: hidden;
+  /*min-height: 100%;*/
 }
+
 
 .footer-list{
   padding: 0;
@@ -336,6 +348,7 @@ i {
   color: rgba(255,255,255, .7);
   font-size: .7rem
 }
+
 /*===============*/
 /*    END FOOTER   */
 /*===============*/
@@ -399,10 +412,86 @@ i {
   height: 30px;
   width: 50%;
   margin-bottom: 25px;
+  padding-top: 3px;
+  font-size: 0.9rem;
 }
 /*===============*/
 /*   END SIGNUP  */
 /*===============*/
+
+/*=== welcome/community blocks spacing fix*/
+.welcome {
+  margin-bottom: -50px;
+}
+
+/*==================*/
+/*   USER PROFILE   */
+/*==================*/
+*{
+  /*border: 1px solid red */
+}
+
+.leftProfile{
+  max-width: 300px;
+  margin-right: 15px;
+  float: left;
+  width: 37.5%;
+}
+
+.leftProfile img{
+  width: 99%;
+}
+
+.rightProfile{
+  max-width: 470px;
+  width: 58.5%;
+  float: right;
+  text-align: justify;
+  margin-top: -18px;
+}
+
+
+.profWrapper{
+  width: 80%;
+  max-width: 800px;
+  border: 4px solid black;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: rgb(240,240,240)
+}
+
+.profWrapper:after {
+    content: " ";
+    display: table;
+    clear: both;
+}
+
+@media (max-width: 650px){
+  .leftProfile{
+    width: 100%;
+    margin: 0 auto;
+    float: left;
+    max-width: 100%
+
+  }
+  .rightProfile{
+    width: 100%;
+    margin: 0 auto;
+    float: left;
+  }
+  .leftProfile img{
+    width: 70%; 
+  }
+
+  .profPic{
+    text-align: center;
+  }
+}
+
+/*==================*/
+/* END USER PROFILE */
+/*==================*/
+
 
 
 
