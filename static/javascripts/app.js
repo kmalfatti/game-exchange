@@ -1,6 +1,7 @@
 $('form').on('submit', function(e){
     e.preventDefault();
     $('.games').empty()
+    $('.games').hide()
     $.ajax({
         url: "https://igdbcom-internet-game-database-v1.p.mashape.com/games/?fields=*&search=" + $('#search').val(),
         headers: { 
@@ -16,27 +17,48 @@ $('form').on('submit', function(e){
                 '<h3>Error</h3>',
                 '<p>Sorry, something went wrong while processing your request.</p>',
                 '<p>Please try again later.</p>'
-                )
+                ).show('slow')
         }
     }).done(function(data){
         if (data.length === 0){
-            $('.games').append('<p>There are no games by that name.</p>')
+            $('.games').append('<p>There are no games by that name.</p>').show('slow')
         }
         data.forEach(function(data){
+            console.log('test', data)
             var id = data.id
             var title = data.name
+            console.log(title)
             var image = data.cover.cloudinary_id
-            var release_date = data.created_at
+            var summary = data.summary
+            var rating = Number(data.rating).toFixed(2)
+            var release_date = new Date(data.release_dates[0].date)
+            var platforms = []
+            var platform = data.release_dates.forEach(function(item){
+                if (item.platform === 9 && platforms.indexOf('Playstation 3') === -1){
+                    platforms.push('Playstation 3')
+                } else if (item.platform === 48 && platforms.indexOf('Playstation 4') === -1){
+                    platforms.push('Playstation 4')
+                } else if (item.platform === 12 && platforms.indexOf('Xbox 360') === -1){
+                    platforms.push('Xbox 360')
+                } else if (item.platform === 49 && platforms.indexOf('Xbox One') === -1){
+                    platforms.push('Xbox One')
+                } else if (item.platform === 3 && platforms.indexOf('Wii') === -1){
+                    platforms.push('Wii')
+                } else if (item.platform === 41 && platforms.indexOf('Wii U') === -1){
+                    platforms.push('Wii U')
+                }
+            })
+            var platformButtons = platforms.map(function(system){
+                return '<button id='+system.split(' ').join('')+' value='+system.split(' ').join('')+'>' + system + '</button>'
+            })
             $('.games').append(
-                '<div class="game">',
-                '<p class="gameId" style="display:none">' + id + '</p>',
-                '<p>' + title + '</p>',
-                '<img src=https://res.cloudinary.com/igdb/image/upload/t_cover_big/' + image + '.jpg>',
-                '</div>',
-                '<div class="gameDesc">',
-
-                '</div>'
-                )
+                '<div class="game"> <p>' + title + '</p> <div class="gameCover"> <p class="gameId" style="display:none">' + id + '</p>' +
+                '<img src=https://res.cloudinary.com/igdb/image/upload/t_cover_big/' + image + '.jpg> </div>' +
+                '<div class="gameDesc"> <p><b>Summary:</b> ' + summary + '</p>' + 
+                '<p><b>Rating:</b> ' + rating + '</p>' + 
+                '<p><b>Release Date:</b> ' + release_date.getMonth() +'/'+ release_date.getDate() +'/'+ release_date.getFullYear() + '</p>' + 
+                '<div>'+ platformButtons.join('') +'</div>' + '</div>' + '</div>'
+                ).show('slow')
         })
     })
     $('#search').val('');
