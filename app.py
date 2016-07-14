@@ -24,14 +24,14 @@ db.init_app(app)
 with app.app_context():
     db.create_all()
 
+
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = "login"
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 CsrfProtect(app)
 
-
-# TODO set up secret key
-# os.environ.get('SECRET_KEY')
-app.config['SECRET_KEY'] = 'random'
-
-class User(db.Model):
+class User(db.Model, UserMixin):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True, unique=True)
     username = db.Column(db.Text(), nullable=False, unique=True)
@@ -46,7 +46,7 @@ class User(db.Model):
     ratings = db.relationship('Rating', backref='rating', lazy='dynamic')
 
 
-    def __init__(self, username, password, email, date_joined, bio=None, location=None, image=None, cred=None):
+    def __init__(self, username, password, email, date_joined, bio=None, location=None, image="../static/images/crash.jpg", cred=0):
      self.username =username
      self.password = bcrypt.generate_password_hash(password).decode('utf-8')
      self.email = email
@@ -69,28 +69,71 @@ from models.rating import Rating
 #   db.Column('id', db.Integer, primary_key=True),
 #   db.Column('receiver_id', db.Integer, db.ForeignKey('ratings.rec_id')),
 # )
+@login_manager.user_loader
+def load_user(user_id):
+    user = User.query.filter(User.id == int(user_id)).first()
+    # from IPython import embed; embed()
+    return user
 
 
 @app.route('/')
 def index():
-  return render_template('index.html')
+  # from IPython import embed; embed()
+  try:
+    user = User.query.get(int(session['user_id']))
+  except:
+    user = None
+  return render_template('index.html', user=user)
 
 @app.route('/about')
 def about():
-  return render_template('about.html')
+  try:
+    user = User.query.get(int(session['user_id']))
+  except:
+    user = None
+  return render_template('about.html', user=user)
 
 @app.route('/search')
 def search():
-  return render_template('search.html')
+  try:
+    user = User.query.get(int(session['user_id']))
+  except:
+    user = None
+  return render_template('search.html', user=user)
 
 @app.route('/contact')
 def contact():
-  return render_template('contact.html')
+  try:
+    user = User.query.get(int(session['user_id']))
+  except:
+    user = None
+  return render_template('contact.html', user=user)
 
 @app.route('/signup')
 def signup():
   form = SignUpForm()
   return render_template('signup.html', form=form)
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+  form = LogInForm()
+  error = None
+  if request.method == 'POST':
+    if form.validate_on_submit():
+      user = User.query.filter_by(username=request.form['username']).first()
+      if user:
+        is_authenticated = bcrypt.check_password_hash(user.password, form.password.data)
+        if is_authenticated:
+          flash('Logged in successfully.')
+          login_user(user)
+          session['logged_in'] = True
+          return redirect(url_for('show', id=user.id))
+        else:
+          error = "Invalid Username/Password"
+      else:
+        error = "Invalid Username/Password"
+  return render_template('login.html', form=form, error=error)
 
 @app.route('/users', methods=['POST'])
 def create():
@@ -101,17 +144,19 @@ def create():
     db.session.add(new_user)
     db.session.commit()
     id = User.query.get(new_user.id).id
-    flash('Success!')
+    login_user(new_user)
+    session['logged_in'] = True
+    flash('Account successfully created!')
     return redirect(url_for('show', id=id))
   return render_template('signup.html', form=form, error=error)
 
 @app.route('/users')
 def user_index():
-  print('teeeeeeest')
   return render_template('users/index.html', users=User.query.all())
 
 
 @app.route('/users/<int:id>')
+@login_required
 def show(id):
   print(id)
   user = User.query.get(id)
@@ -124,7 +169,14 @@ def edit(id):
   form = EditForm()
   return render_template('users/edit.html', form=form)
 
-
+@app.route('/logout')
+@login_required
+def logout():
+    session.clear()
+    logout_user()
+    flash('Logged out')
+    return redirect(url_for('login'))
+    
 
 if __name__ == '__main__':
     app.run(debug=True, port=3000)

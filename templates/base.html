@@ -6,6 +6,10 @@
   https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
   <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='style.css') }}">
+  <script type=text/javascript>
+  $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+  </script>
+
   <title>Base</title>
 </head>
 <body>
@@ -26,20 +30,38 @@
     </ul>
 
   <h1 id="mobileLogo"><a href="/">Game Exchange</a></h1>
+  
+  {% if session['logged_in'] %}
+  <aside class="aside">
+      <a id='logout' href="{{url_for('logout')}}">Logout</a>
+      
+      <a id='navImgLink' href="{{url_for('show', id=user.id)}}"><img id='navImg' src="{{user.image}}" alt="{{user.username}}"></a>
+  </aside>
+  
+  {% else %}
 
   <aside class="aside">
     <ul>
-      <li>Log In</li>
+      <li><a href="{{url_for('login')}}">Log In</a></li>
       <li><a href="{{url_for('signup')}}">Sign Up</a></li>
     </ul>
   </aside>
+
+  <aside class="aside" id="mobileLogin">
+      <a href="{{url_for('login')}}">Log In</a>
+  </aside>
+  {% endif %}
   </nav>
 </header>
 
+  {% for message in get_flashed_messages() %}
+  <div class="flash">
+  <p>{{message}}</p>
+  </div>
+  {% endfor %}
 
   {% block content %}
   {% endblock %}
-
 
 <footer>
   <div class="icons">

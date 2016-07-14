@@ -3,11 +3,16 @@
 
 <main>
 
-  <h1>Sign up!</h1>
+  <h1>Log in!</h1>
 
   <div class="form">
-  <form action="{{url_for('create')}}" method="POST">
+  <form action="{{url_for('login')}}" method="POST">
   {{ form.csrf_token }}
+  <div>
+    {% if error %}
+        <p class="errorText">{{ error }}</p>
+    {% endif %}
+  </div>
   <div>
   {{ form.username(placeholder="Username") }}
     {% if form.username.errors %}
@@ -21,15 +26,6 @@
   {{ form.password(placeholder="Password") }}
   {% if form.password.errors %}
         {% for error in form.password.errors %}
-          <p class="errorText">{{ error }}</p>
-        {% endfor %}
-      {% endif %}
-  </div>
-  
-  <div>
-  {{ form.email(placeholder="Email") }}
-  {% if form.email.errors %}
-        {% for error in form.email.errors %}
           <p class="errorText">{{ error }}</p>
         {% endfor %}
       {% endif %}

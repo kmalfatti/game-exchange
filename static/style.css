@@ -2,6 +2,10 @@
   margin: 0;
   padding: 0;
 }*/
+.flash{
+  margin: 10px auto;
+  text-align: center;
+}
 
 /*============ NAV =============*/
 
@@ -15,8 +19,34 @@
 #mobileLogo{
   display: none;
   font-size: 1rem;
-  /*margin: auto;*/
+  /*padding-left: 0;*/
 }
+
+#navImg{
+  border-radius: 25px;
+  display: inline;
+  width: 35px;
+  padding: 7px 7px;
+  position: absolute;
+  right: 8px;
+  top: 4px;
+}
+
+/*#navImg:hover{
+  transform: scale(1.1);
+  transition: all 0.2s ease-in-out;
+}*/
+
+#logout{
+  position: absolute;
+  top: 20px;
+  right: 70px;
+}
+
+#mobileLogin{
+  display: none;
+}
+
 
 @media (max-width: 650px) {
   .nav-list li{
@@ -28,9 +58,10 @@
     left: 5px;
   }
   #mobileLogo{
-    display: inline-block;
-    /*margin-right: 30px;*/
-    padding-right: 25px;
+    display: inline;
+    width: 100%;
+    margin: 0 auto;
+    padding-right: 30px;
   }
   .top-nav{
     text-align: center;
@@ -38,15 +69,25 @@
   .aside ul li{
     display: none;
   }
+  #logout{
+    display: none;
+  }
+  #mobileLogin{
+  display: inline-block;
+  position: absolute;
+  right: 5px;
+  top: 13px;
+}
+
   
 
 }
 
 .top-nav *{
   display: inline-block;
-  padding-left: 10px;
   color: white;
-  font-family: Arial, Helvetica, sans-serif
+  font-family: Arial, Helvetica, sans-serif;
+  padding-left: 10px;
 }
 
 .top-nav{
@@ -61,6 +102,7 @@ a {
 aside {
   float: right;
   padding-right: 10px;
+  margin-top: 4px;
 }
 
 h1 {
@@ -300,9 +342,7 @@ main {
 
 /*=============*/
 
-
-/*====  TEMP */
-a:hover{
+li a:hover, #logout:hover, #mobileLogin a:hover, #mobileLogo a:hover{
   transform: scale(1.1);
   transition: all 0.2s ease-in-out;
 }
@@ -312,10 +352,6 @@ a:hover{
 /*===============*/
 /*    FOOTER   */
 /*===============*/
-.wrapper{
-  min-height: 100%;
-  overflow: hidden;
-}
 
 footer {
   /*background-color: rgb(0,94,184);*/
@@ -492,6 +528,49 @@ i {
 /* END USER PROFILE */
 /*==================*/
 
+/*==================*/
+/*     Search       */
+/*==================*/
 
+.searchForm{
+  padding: 10px; 
+  margin-top: 20px;
+  text-align: center;
+  border: 2px solid black;
+  background-color: rgb(240,240,240)
+}
+
+.searchForm input{
+  border: 1px solid black
+}
+
+.searchForm button{
+  color: white;
+  background-color: rgb(0,94,184);
+  border-radius: 5px;
+  height: 25px;
+  width: 20%;
+  max-width: 170px;
+  padding-top: 3px;
+  font-size: 0.9rem;
+}
+
+*{
+  /*border: 1px solid red */
+}
+
+.games{
+  background-color: rgb(240,240,240);
+  margin: 10px 0;
+  padding: 20px;
+  border: 2px solid black;
+}
+
+
+
+
+/*==================*/
+/*    END Search    */
+/*==================*/
 
 
