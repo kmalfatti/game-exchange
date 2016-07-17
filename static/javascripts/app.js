@@ -46,6 +46,8 @@ $('.searchForm').on('submit', function(e){
                     platforms.push('Wii')
                 } else if (item.platform === 41 && platforms.indexOf('Wii U') === -1){
                     platforms.push('Wii U')
+                } else if (platforms.length===0){
+                    platforms.push('Other')
                 }
             })
             var platformInputs = platforms.map(function(system, index){
