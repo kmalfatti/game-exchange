@@ -8,6 +8,7 @@ from flask_wtf import CsrfProtect
 from functools import wraps
 import datetime
 from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user
+import re
 
 
 
@@ -42,7 +43,7 @@ class User(db.Model, UserMixin):
     location = db.Column(db.Text())
     image = db.Column(db.Text())
     cred = db.Column(db.Integer)
-    games = db.relationship('Game', backref='user', lazy='dynamic')
+    games = db.relationship('Game', backref='users', lazy='dynamic')
     ratings = db.relationship('Rating', backref='rating', lazy='dynamic')
 
 
@@ -59,11 +60,11 @@ class User(db.Model, UserMixin):
 from models.games import Game
 from models.rating import Rating
 
-# user_games = db.Table('user_games', 
-#   db.Column('id', db.Integer, primary_key=True),
-#   db.Column('game_id', db.Integer, db.ForeignKey('games.id')),
-#   db.Column('user_id', db.Integer, db.ForeignKey('users.id'))
-# )
+user_games = db.Table('user_games', 
+  db.Column('id', db.Integer, primary_key=True),
+  db.Column('game_id', db.Integer, db.ForeignKey('games.id')),
+  db.Column('user_id', db.Integer, db.ForeignKey('users.id'))
+)
 
 # user_rating = db.Table('user_ratings',
 #   db.Column('id', db.Integer, primary_key=True),
@@ -125,7 +126,7 @@ def login():
       if user:
         is_authenticated = bcrypt.check_password_hash(user.password, form.password.data)
         if is_authenticated:
-          flash('Logged in successfully.')
+          flash('Welcome back, '+user.username+'!')
           login_user(user)
           session['logged_in'] = True
           return redirect(url_for('show', id=user.id))
@@ -160,8 +161,14 @@ def user_index():
 def show(id):
   print(id)
   user = User.query.get(id)
-  print(user)
-  return render_template('users/show.html', user=user)
+  # print(user)
+  # db.users.filter_by(name='Joe')
+  games = Game.query.all()
+  # print('uggggg', user.games)
+  print('games', games)
+  print('games', games[0].own)
+  # from IPython import embed; embed()
+  return render_template('users/show.html', user=user, games=games)
 
 
 @app.route('/users/<int:id>/edit')
@@ -176,6 +183,28 @@ def logout():
     logout_user()
     flash('Logged out')
     return redirect(url_for('login'))
+
+@app.route('/search', methods=['POST'])
+@login_required
+def add_game():
+    user = User.query.get(int(session['user_id']))
+    game_id = request.form['game_id']
+    if request.form['action'] == 'I own it!':
+      own = True
+      user.games_owned = game_id 
+    else:
+      own = False
+      user.games_wanted = game_id
+    name = request.form['name']
+    platform = re.sub('-',' ', request.form['platform'])
+    cover = request.form['image']
+    new_game = Game(name, user.id, game_id, cover, own, platform)
+    print(new_game)
+    # from IPython import embed; embed()
+    db.session.add(new_game)
+    db.session.commit()
+    flash('Successfully Added Game')
+    return render_template('search.html', user=user)
     
 
 if __name__ == '__main__':

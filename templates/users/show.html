@@ -2,7 +2,7 @@
 
 {% block content %}
 <main>
-  <div class="profWrapper">
+  <div class="profWrapper animated fadeIn">
   <h3>{{user.username}}</h3>
     <div class="leftProfile">
       <div class="profPic">
@@ -15,7 +15,32 @@
     </div>
     <div class="rightProfile">
       <p><b>Bio: </b>{{user.bio}}</p>
-      <p><b>Games: </b></p>
+      <hr>
+      <div class="gameList">
+      <div class="owned">
+          <h4>Games I Own:</h4>
+          {% for game in games %}
+            {% if (user.id is equalto game.user_id) and (game.own is equalto True) %}
+            <div class="own">
+            <p>{{game.name}}</p>
+            <p>{{game.platform}}</p>
+            <img src=https://res.cloudinary.com/igdb/image/upload/t_cover_big/{{game.cover}}.jpg>
+            </div>
+            {% endif %}
+          {% endfor %}
+          </div>
+          <hr id="gameHr">
+          <h4>Games I Want:</h4>
+          {% for game in games %}
+            {% if (user.id is equalto game.user_id) and (game.own is equalto False) %}
+            <div class="want">
+            <p>{{game.name}}</p>
+            <p>{{game.platform}}</p>
+            <img src=https://res.cloudinary.com/igdb/image/upload/t_cover_big/{{game.cover}}.jpg>
+            </div>
+            {% endif %}
+          {% endfor %}
+      </div>
     </div>
   </div>
 </main>

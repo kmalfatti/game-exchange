@@ -1,4 +1,4 @@
-$('form').on('submit', function(e){
+$('.searchForm').on('submit', function(e){
     e.preventDefault();
     $('.games').empty()
     $('.games').hide()
@@ -20,14 +20,14 @@ $('form').on('submit', function(e){
                 ).show('slow')
         }
     }).done(function(data){
+        var csrftoken = $('meta[name=csrf-token]').attr('content')
         if (data.length === 0){
             $('.games').append('<p>There are no games by that name.</p>').show('slow')
         }
         data.forEach(function(data){
-            console.log('test', data)
+            try {
             var id = data.id
             var title = data.name
-            console.log(title)
             var image = data.cover.cloudinary_id
             var summary = data.summary
             var rating = Number(data.rating).toFixed(2)
@@ -48,19 +48,40 @@ $('form').on('submit', function(e){
                     platforms.push('Wii U')
                 }
             })
-            var platformButtons = platforms.map(function(system){
-                return '<button id='+system.split(' ').join('')+' value='+system.split(' ').join('')+'>' + system + '</button>'
+            var platformInputs = platforms.map(function(system, index){
+                return '<input type="radio" id='+system.split(' ').join('')+' name="platform" value='+system.replace(/ /,"-") + '>' + system
             })
             $('.games').append(
                 '<div class="game"> <p>' + title + '</p> <div class="gameCover"> <p class="gameId" style="display:none">' + id + '</p>' +
                 '<img src=https://res.cloudinary.com/igdb/image/upload/t_cover_big/' + image + '.jpg> </div>' +
                 '<div class="gameDesc"> <p><b>Summary:</b> ' + summary + '</p>' + 
                 '<p><b>Rating:</b> ' + rating + '</p>' + 
-                '<p><b>Release Date:</b> ' + release_date.getMonth() +'/'+ release_date.getDate() +'/'+ release_date.getFullYear() + '</p>' + 
-                '<div>'+ platformButtons.join('') +'</div>' + '</div>' + '</div>'
+                '<p><b>Release Date:</b> ' + Number(release_date.getMonth()+1) +'/'+ release_date.getDate() +'/'+ release_date.getFullYear() + '</p>' + 
+                '<form id="addGameForm" action="/search" method="POST"><div class="inputs">'+ platformInputs.join('') + '</div><div class="buttons"> <input type="submit" id="own" name="action" value="I own it!">' + '<input type="submit" id="want" name="action" value="I want it!"></div>' +
+                '<input id="csrf_token" name="csrf_token" type="hidden" value="' + csrftoken + '">' + '<input type="hidden" name="name" value="'+ title + '">' + '<input type="hidden" name="image" value="'+ image + '">' +
+                '<input type="hidden" name="game_id" value="'+ id + '">' + 
+                '</form>' +'</div>' + '</div> <hr>'
                 ).show('slow')
+            }
+            catch(err){console.log(err)}
         })
     })
     $('#search').val('');
 })
-  
+
+$('.homeSearchForm').on('submit', function(e){
+    e.preventDefault()
+    var game = $('#homeSearch').val()
+    window.location.href = "/search?" + game
+})
+
+$('.searchForm').ready(function() {
+    if (window.location.search.substring(1)){
+        var query = window.location.search.substring(1)
+        var vars = query.split("%20").join(" ")
+        $('#search').val(vars)
+        $('#searchBtn').click()
+    }
+});
+
+

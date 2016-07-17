@@ -3,16 +3,18 @@
 <script type=text/javascript src='../static/javascripts/jquery-1.8.1.js'></script>
 <main>
   <div class="wrapper">
-    <form action='' class="searchForm">
-      <label>Search by game title, or platform:</label>
-      <input id="search" type="text" placeholder="Search" autofocus="" autocomplete="off">
-      <button type="submit">Search</button>
+  
+    <form action='' class="searchForm animated fadeIn">
+      <p class="animated fadeInLeft">Search by game title:</p>
+      <input class="animated fadeInUp" id="search" type="text" placeholder="Search" autofocus="" autocomplete="off">
+      <button class="animated fadeInRight" id="searchBtn" type="submit">Search</button>
     </form>
 
   <div class="games"></div>
-  
   </div>
 
 </main>
 <script type=text/javascript src='../static/javascripts/app.js'></script>
 {% endblock %}
+
+
