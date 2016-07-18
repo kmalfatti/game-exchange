@@ -3,7 +3,23 @@
 {% block content %}
 
 <main>
-  
+  <div class="profWrapper trade animated fadeIn">
+    <h1>Trade</h1>
+    <p>Below are a list of users who have the game you want. Click their profile to see if you have any games they want!</p>
+    {% for game in games %}
+      {% for user_game in user_games %}
+        {% if user_game.name == game.name  %}
+          {% if game.own == True %}
+            {% if user_game.own == False %}
+              {% if game.platform == user_game.platform %}
+              <a href="{{url_for('show', id=game.user_id)}}"><p>{{game.platform}} - {{game.name}}</p></a>
+              {% endif %}
+            {% endif %}
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+    {% endfor %}
+  </div>
 </main>
 
 

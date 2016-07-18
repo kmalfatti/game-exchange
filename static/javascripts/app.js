@@ -30,10 +30,16 @@ $('.searchForm').on('submit', function(e){
             var title = data.name
             var image = data.cover.cloudinary_id
             var summary = data.summary
+            if (!data.summary){
+                summary = "No summary available"
+            }
             var rating = Number(data.rating).toFixed(2)
+            if (!data.rating){
+                rating = "Not Rated"
+            }
             var release_date = new Date(data.release_dates[0].date)
             var platforms = []
-            var platform = data.release_dates.forEach(function(item){
+            var platform = data.release_dates.forEach(function(item, idx){
                 if (item.platform === 9 && platforms.indexOf('Playstation 3') === -1){
                     platforms.push('Playstation 3')
                 } else if (item.platform === 48 && platforms.indexOf('Playstation 4') === -1){
@@ -46,7 +52,7 @@ $('.searchForm').on('submit', function(e){
                     platforms.push('Wii')
                 } else if (item.platform === 41 && platforms.indexOf('Wii U') === -1){
                     platforms.push('Wii U')
-                } else if (platforms.length===0){
+                } else if (platforms.length===0 && data.release_dates.length-1 === idx){
                     platforms.push('Other')
                 }
             })
@@ -85,5 +91,13 @@ $('.searchForm').ready(function() {
         $('#searchBtn').click()
     }
 });
+
+$('.hover').on('click',function(e){
+    $(e.target).next().show()
+})
+
+$('.sure').on('click', function(){
+    $('.sure').fadeOut()
+})
 
 

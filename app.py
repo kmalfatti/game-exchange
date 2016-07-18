@@ -32,6 +32,7 @@ login_manager.login_view = "login"
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 CsrfProtect(app)
 
+# TODO - Refactor database design
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True, unique=True)
@@ -47,7 +48,7 @@ class User(db.Model, UserMixin):
     ratings = db.relationship('Rating', backref='rating', lazy='dynamic')
 
 
-    def __init__(self, username, password, email, date_joined, bio=None, location=None, image="../static/images/crash.jpg", cred=0):
+    def __init__(self, username, password, email, date_joined, bio=None, location="San Francisco, CA", image="../static/images/crash.jpg", cred=0):
      self.username =username
      self.password = bcrypt.generate_password_hash(password).decode('utf-8')
      self.email = email
@@ -152,8 +153,13 @@ def create():
   return render_template('signup.html', form=form, error=error)
 
 @app.route('/users')
+@login_required
 def user_index():
-  return render_template('users/index.html', users=User.query.all())
+  user = User.query.get(int(session['user_id']))
+  user_games = user.games.all()
+  games = Game.query.all()
+  # from IPython import embed; embed()
+  return render_template('users/index.html', user=user, user_games=user_games, games=games)
 
 
 @app.route('/users/<int:id>')
