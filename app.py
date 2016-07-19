@@ -193,6 +193,9 @@ def rate(id, id2):
 def submit_rating(id, id2):
   form=RateForm()
   user = User.query.get(id)
+  if(form.stars.data==''):
+    flash("Click on a star to rate the user")
+    return redirect(url_for('rate', id=id, id2=id2))
   if (id == id2):
     flash('Nice try...You should get 1 star for that! :(')
     return redirect(url_for('show', id=user.id))
