@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<script type=text/javascript src="{{ url_for('static', filename='javascripts/jquery-1.8.1.js') }}"></script>
+
+<main>
+  <div class="rateWrap animated lightSpeedIn">
+  <p>Please rate {{user2.username}}:</p>
+  <form action="{{url_for('submit_rating', id=user.id, id2=user2.id)}}" method="POST">
+    <div>
+    {{ form.csrf_token }}
+    {{ form.stars }}
+      <ul class="stars">
+        <li class="1star">&#9733;</li>
+        <li class="2star">&#9733;</li>
+        <li class="3star">&#9733;</li>
+        <li class="4star">&#9733;</li>
+        <li class="5star">&#9733;</li>
+      </ul>
+    </div>
+    <input type="submit">
+  </form>
+</div>
+</main>
+<script type=text/javascript src="{{ url_for('static', filename='javascripts/app.js') }}"></script>
+{% endblock %}
+

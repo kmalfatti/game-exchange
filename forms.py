@@ -1,5 +1,5 @@
 from flask_wtf import Form
-from wtforms import StringField, PasswordField
+from wtforms import StringField, PasswordField, HiddenField
 from wtforms.validators import DataRequired, Length, Email
 
 
@@ -19,5 +19,9 @@ class EditForm(Form):
   location = StringField('location')
   image = StringField('image')
 
-  
+class TradeForm(Form):
+  name = HiddenField('name')
+  platform = HiddenField('platform')
 
+class RateForm(Form):
+  stars = HiddenField('stars')

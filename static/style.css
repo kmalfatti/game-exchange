@@ -801,6 +801,23 @@ hr{
 }
 
 
+.stars *{
+  display: inline-block;
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: rgb(200,200,200);
+}
 
+.stars{
+  padding: 0;
+}
 
+.rateWrap{
+  text-align: center;
+}
 
+.rateWrap input{
+  border-radius: 5px;
+  background-color: rgb(0,94,184);
+  color: white;
+}

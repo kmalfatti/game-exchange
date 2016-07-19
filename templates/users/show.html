@@ -2,6 +2,7 @@
 
 {% block content %}
 <script type=text/javascript src='../static/javascripts/jquery-1.8.1.js'></script>
+
 <main>
   <div class="profWrapper animated fadeIn">
   <h3>{{user.username}}</h3>
@@ -13,22 +14,25 @@
       <p><b>Location: </b>{{user.location}}</p>
       <p><b>Email: </b>{{user.email}}</p>
       <p><b>Cred: </b>{{user.cred}}</p>
+      <p><b>Rating: </b>{{r}}</p>
     </div>
     <div class="rightProfile">
       <p><b>Bio: </b>{{user.bio}}</p>
       <hr>
       <div class="gameList">
       <div class="owned">
-          <h4>Games I Own:</h4>
+          <h4>Games {{user.username}} Owns:</h4>
           {% for game in games %}
             {% if (user.id is equalto game.user_id) and (game.own is equalto True) %}
             <div class="own box">
             <div class="overbox">
               <p class="hover">Request</p>
               <div class="sure">
-              <form action="">
-                <input type="hidden">
+              <form action="{{url_for('trade', id=user.id)}}" method="POST">
+                {{ form.csrf_token }}
                 <p>Are you sure you want to exchange {{game.name}}?</p>
+                {{ form.name(value=game.name) }}
+                {{ form.platform(value=game.platform) }}
                 <button class="yes" type="submit">Yes</button>
                 <p class="no">No</p>
               </form>
@@ -42,7 +46,7 @@
           {% endfor %}
           </div>
           <hr id="gameHr">
-          <h4>Games I Want:</h4>
+          <h4>Games {{user.username}} Wants:</h4>
           {% for game in games %}
             {% if (user.id is equalto game.user_id) and (game.own is equalto False) %}
             <div class="want">

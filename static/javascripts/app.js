@@ -100,4 +100,45 @@ $('.sure').on('click', function(){
     $('.sure').fadeOut()
 })
 
+$('.1star').on('click', function(){
+    $('.1star').css('color', '#FFDF00')
+    $('.2star').css('color', 'rgb(200,200,200)')
+    $('.3star').css('color', 'rgb(200,200,200)')
+    $('.4star').css('color', 'rgb(200,200,200)')
+    $('.5star').css('color', 'rgb(200,200,200)')
+    $('#stars').val(1)
+})
+$('.2star').on('click', function(){
+    $('.1star').css('color', '#FFDF00')
+    $('.2star').css('color', '#FFDF00')
+    $('.3star').css('color', 'rgb(200,200,200)')
+    $('.4star').css('color', 'rgb(200,200,200)')
+    $('.5star').css('color', 'rgb(200,200,200)')
+    $('#stars').val(2)
+})
+$('.3star').on('click', function(){
+    $('.1star').css('color', '#FFDF00')
+    $('.2star').css('color', '#FFDF00')
+    $('.3star').css('color', '#FFDF00')
+    $('.4star').css('color', 'rgb(200,200,200)')
+    $('.5star').css('color', 'rgb(200,200,200)')
+    $('#stars').val(3)
+})
+$('.4star').on('click', function(){
+    $('.1star').css('color', '#FFDF00')
+    $('.2star').css('color', '#FFDF00')
+    $('.3star').css('color', '#FFDF00')
+    $('.4star').css('color', '#FFDF00')
+    $('.5star').css('color', 'rgb(200,200,200)')
+    $('#stars').val(4)
+})
+$('.5star').on('click', function(){
+    $('.1star').css('color', '#FFDF00')
+    $('.2star').css('color', '#FFDF00')
+    $('.3star').css('color', '#FFDF00')
+    $('.4star').css('color', '#FFDF00')
+    $('.5star').css('color', '#FFDF00')
+    $('#stars').val(5)
+})
+
 
