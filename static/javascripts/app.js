@@ -2,6 +2,7 @@ $('.searchForm').on('submit', function(e){
     e.preventDefault();
     $('.games').empty()
     $('.games').hide()
+    $('footer').css({position:'fixed',bottom: 0})
     $.ajax({
         url: "https://igdbcom-internet-game-database-v1.p.mashape.com/games/?fields=*&search=" + $('#search').val(),
         headers: { 
@@ -18,6 +19,7 @@ $('.searchForm').on('submit', function(e){
                 '<p>Sorry, something went wrong while processing your request.</p>',
                 '<p>Please try again later.</p>'
                 ).show('slow')
+            $('footer').css({position:'absolute',bottom: 0})
         }
     }).done(function(data){
         var csrftoken = $('meta[name=csrf-token]').attr('content')
@@ -73,8 +75,18 @@ $('.searchForm').on('submit', function(e){
             }
             catch(err){console.log(err)}
         })
-    })
+
+    if (data.length===0){
+        $('footer').css({position:'fixed',bottom: 0})
+    }
     $('#search').val('');
+    if (data.length > 0){
+        $('footer').hide()
+        setTimeout( function(){ 
+            $('footer').css({position:'static',bottom: 0}).show('slow')
+        }  ,500)
+    }
+    })
 })
 
 $('.homeSearchForm').on('submit', function(e){
@@ -145,5 +157,12 @@ $('#bars').click(function(){
     $('#sideNav').toggle('slow')
 })
 
-
+$(document).ready(function(){
+    var path=window.location.pathname
+    if (path==="/contact"){
+        if (window.screen.height > 999){
+            $('footer').css({position:'absolute',bottom: 0})
+        }
+    }
+})
 

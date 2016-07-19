@@ -7,6 +7,11 @@
   text-align: center;
 }
 
+main{
+  /*min-height: 535px*/
+}
+
+
 /*============ NAV =============*/
 
 #bars{
@@ -185,7 +190,7 @@ body {
 }
 
 main {
-  min-height: 535px;
+  /*min-height: 535px;*/
 }
 
 .wrapper {
@@ -346,6 +351,7 @@ footer {
   background: linear-gradient(rgb(0,94,184) 60%, rgba(0,0,0, .8));
   width: 100%;
   overflow: hidden;
+  bottom: 0;
 }
 
 
@@ -457,7 +463,11 @@ i {
 
 .contactWrap{
   width: 270px;
-  margin: 0 auto
+  margin: 0 auto;
+}
+
+.contact{
+  margin-bottom: 100px;
 }
 
 .ceo{
@@ -830,6 +840,7 @@ hr{
     display: none !important;
   }
 }
+
 
 
 
