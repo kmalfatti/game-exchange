@@ -4,30 +4,30 @@
 
 <main>
   <div class="profWrapper animated fadeIn">
-  <h3>{{user.username}}</h3>
+  <h3>{{user2.username}}</h3>
     <div class="leftProfile">
       <div class="profPic">
-        <img src="{{user.image}}" alt="Photo of {{user.username}}">
+        <img src="{{user2.image}}" alt="Photo of {{user2.username}}">
       </div>
-      <p><b>Memeber since: </b><em>{{user.date_joined.strftime('%m-%d-%Y')}}</em></p>
-      <p><b>Location: </b>{{user.location}}</p>
-      <p><b>Email: </b>{{user.email}}</p>
-      <p><b>Cred: </b>{{user.cred}}</p>
+      <p><b>Memeber since: </b><em>{{user2.date_joined.strftime('%m-%d-%Y')}}</em></p>
+      <p><b>Location: </b>{{user2.location}}</p>
+      <p><b>Email: </b>{{user2.email}}</p>
+      <p><b>Cred: </b>{{user2.cred}}</p>
       <p><b>Rating: </b>{{r}}</p>
     </div>
     <div class="rightProfile">
-      <p><b>Bio: </b>{{user.bio}}</p>
+      <p><b>Bio: </b>{{user2.bio}}</p>
       <hr>
       <div class="gameList">
       <div class="owned">
-          <h4>Games {{user.username}} Owns:</h4>
+          <h4>Games {{user2.username}} Owns:</h4>
           {% for game in games %}
-            {% if (user.id is equalto game.user_id) and (game.own is equalto True) %}
+            {% if (user2.id is equalto game.user_id) and (game.own is equalto True) %}
             <div class="own box">
             <div class="overbox">
               <p class="hover">Request</p>
               <div class="sure">
-              <form action="{{url_for('trade', id=user.id)}}" method="POST">
+              <form action="{{url_for('trade', id=user2.id)}}" method="POST">
                 {{ form.csrf_token }}
                 <p>Are you sure you want to exchange {{game.name}}?</p>
                 {{ form.name(value=game.name) }}
@@ -45,9 +45,9 @@
           {% endfor %}
           </div>
           <hr id="gameHr">
-          <h4>Games {{user.username}} Wants:</h4>
+          <h4>Games {{user2.username}} Wants:</h4>
           {% for game in games %}
-            {% if (user.id is equalto game.user_id) and (game.own is equalto False) %}
+            {% if (user2.id is equalto game.user_id) and (game.own is equalto False) %}
             <div class="want">
             <p>{{game.name}}</p>
             <p>{{game.platform}}</p>

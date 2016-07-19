@@ -211,7 +211,8 @@ def show(id):
   form = TradeForm()
   rateForm = RateForm()
   r='Not Rated'
-  user = User.query.get(id)
+  user2 = User.query.get(id)
+  user = User.query.get(int(session['user_id']))
   ratings = Rating.query.all()
   user_rating = []
   for rating in ratings:
@@ -220,7 +221,7 @@ def show(id):
   if (len(user_rating) > 0):
     r = sum(user_rating)/len(user_rating)
   games = Game.query.all()
-  return render_template('users/show.html', user=user, games=games, form=form, rateForm=rateForm, r=r)
+  return render_template('users/show.html',user=user, user2=user2, games=games, form=form, rateForm=rateForm, r=r)
 
 @app.route('/users/<int:id>/edit')
 def edit(id):
