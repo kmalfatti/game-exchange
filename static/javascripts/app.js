@@ -141,4 +141,9 @@ $('.5star').on('click', function(){
     $('#stars').val(5)
 })
 
+$('#bars').click(function(){
+    $('#sideNav').toggle('slow')
+})
+
+
 

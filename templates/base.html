@@ -12,13 +12,11 @@
   <title>Base</title>
 </head>
 <body>
+<script type=text/javascript src="{{ url_for('static', filename='javascripts/jquery-1.8.1.js') }}"></script>
 <header>
   <nav class="top-nav">
-    <div class="">
+    <div>
       <span id="bars">&#9776;</span>
-      <ul>
-        
-      </ul>
     </div>
 
     <ul class="nav-list">
@@ -52,6 +50,17 @@
   </aside>
   {% endif %}
   </nav>
+  <ul id="sideNav">
+    <li><a href="{{url_for('about')}}">About</a></li>
+    <li><a href="{{url_for('contact')}}">Contact</a></li>
+    <li><a href="{{url_for('search')}}">Search</a></li>
+    <li><a href="{{url_for('user_index')}}">Trade</a></li>
+    {% if session['logged_in']%}
+    <li><a href="{{url_for('logout')}}">Logout</a></li>
+    {% else %}
+    <li><a href="{{url_for('signup')}}">Signup</a></li>
+    {% endif %}
+  </ul>
 </header>
 
   {% for message in get_flashed_messages() %}
@@ -59,6 +68,7 @@
   <p>{{message}}</p>
   </div>
   {% endfor %}
+
 
   {% block content %}
   {% endblock %}
@@ -79,6 +89,7 @@
   </ul>
   <p id="copyright">&copy; 2016 &nbsp; The Game Exchange</p>
 </footer>
+<script type=text/javascript src="{{ url_for('static', filename='javascripts/app.js') }}"></script>
 </body>
 </html>
 

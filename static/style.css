@@ -11,15 +11,17 @@
 
 #bars{
   display: none;
-  padding-top: 20px;
+  position: absolute;
+  top: 20px;
+  left: 10px;
   width: 30px;
   height: 30px;
+  cursor: pointer;
 }
 
 #mobileLogo{
   display: none;
   font-size: 1rem;
-  /*padding-left: 0;*/
 }
 
 #navImg{
@@ -43,7 +45,7 @@
 }
 
 
-@media (max-width: 650px) {
+@media screen and (max-width: 650px) {
   .nav-list li{
     display: none;
   }
@@ -80,9 +82,6 @@
     width: 100%;
     margin-top: 5px;
   }
-
-  
-
 }
 
 .top-nav *{
@@ -137,9 +136,7 @@ h1 {
 }
 
 .graybox {
-  /*text-align: center;*/
   padding: 10px 50px 50px 50px;
-  /*width: 60%;*/
   margin: auto;
   background: rgba(20,20,20, 0.4);
   z-index: 1;
@@ -169,13 +166,9 @@ h1 {
 .title {
   font-size: 2rem;
 }
-body{
-  /*background-color: rgb(222,222,222);*/
-}
 
 .community {
   height: 500px;
-  /*background-color: rgb(200,200,200)*/
   background-image: url(../static/images/community.png);
   background-size: cover;
   background-repeat: no-repeat;
@@ -189,7 +182,6 @@ body{
 body {
   margin: 0;
   padding: 0;
-  /*text-align: center;*/
 }
 
 main {
@@ -202,23 +194,17 @@ main {
   max-width: 1100px;
 }
 
-/*CSS DEBUG*/
-/**{ border: 1px solid red; }*/
-/*=============*/
-
 /*==== Block Hover ====*/
 .view {
     width: 250px;
     height: 200px;
     margin: 10px;
-    /*float: left;*/
     border: 10px solid black;
     overflow: hidden;
     position: relative;
     text-align: center;
     box-shadow: 1px 1px 2px #e6e6e6;
     cursor: default;
-    /*background-size: contain;*/
     background: #fff;
 }
 .view .mask, .view .content {
@@ -230,7 +216,6 @@ main {
     left: 0
 }
 .view img {
-    /*background-size: contain;*/
     width: 80%;
 }
 .view h2 {
@@ -252,7 +237,7 @@ main {
     padding: 10px 20px 20px;
     text-align: center
 }
-.view a.info {f
+.view a.info {
     display: inline-block;
     text-decoration: none;
     padding: 7px 14px;
@@ -270,7 +255,6 @@ main {
 }
 .view-first .mask {
     opacity: 0;
-    /*background-color: rgba(100,100,100, 0.7);*/
     background-color: rgba(0,94,184, 0.7); 
     transition: all 0.4s ease-in-out;
 }
@@ -308,7 +292,6 @@ main {
 .view-first:hover a.info {
     transition-delay: 0.2s;
 }
-
 /*=====================*/
 
 
@@ -331,13 +314,11 @@ main {
 .block-group {
   text-align: center;
   margin-bottom: 200px;
-  /*background-color: white;*/
 }
 
 .block {
   position: default;
   margin: 10px 20px;
-  /*text-align: center;*/
   display: inline-block;
   width: 250px;
   height: 200px;
@@ -355,20 +336,16 @@ li a:hover, #logout:hover, #mobileLogin a:hover, #mobileLogo a:hover{
   transition: all 0.2s ease-in-out;
 }
 
-
-
 /*===============*/
 /*    FOOTER   */
 /*===============*/
 
 footer {
-  /*background-color: rgb(0,94,184);*/
   text-align: center;
   min-height: 100px;
   background: linear-gradient(rgb(0,94,184) 60%, rgba(0,0,0, .8));
   width: 100%;
   overflow: hidden;
-  /*min-height: 100%;*/
 }
 
 
@@ -394,7 +371,7 @@ i {
 }
 
 /*===============*/
-/*    END FOOTER   */
+/*  END FOOTER   */
 /*===============*/
 
 /*===============*/
@@ -424,7 +401,6 @@ i {
 /*===============*/
 
 
-
 /*===============*/
 /*    SINGUP */
 /*===============*/
@@ -441,7 +417,6 @@ i {
   max-width: 600px;
   background-color: rgb(222,222,222);
   border-radius: 5px;
-  /*box-shadow: 5px 5px 5px #888888;*/
 }
 
 .form div{
@@ -593,10 +568,6 @@ text-align: center;
 }
 
 
-*{
-  /*border: 1px solid red */
-}
-
 @media (max-width: 650px){
   .leftProfile{
     width: 100%;
@@ -657,9 +628,6 @@ text-align: center;
   font-size: 0.9rem;
 }
 
-*{
-  /*border: 1px solid red */
-}
 
 .games{
   background-color: rgb(240,240,240);
@@ -772,8 +740,6 @@ hr{
   background-color: rgb(240, 240, 240);
   border-radius: 5px;
   border: 4px solid black;
-  /*top: 40%;*/
-  /*left: 30%;*/
   margin: auto;
   position: absolute;
   left: 0;right: 0;
@@ -821,3 +787,49 @@ hr{
   background-color: rgb(0,94,184);
   color: white;
 }
+
+/*==============*/
+/* mobile nav   */
+/*==============*/
+
+#sideNav{
+  display: none;
+  position: absolute;
+  top: 38px;
+  left: 0;
+  background-color: rgba(50,50,50, .9);
+  padding: 0;
+  z-index: 2;
+  border-radius: 0 5px 5px 5px;
+  border: 3px solid black;
+}
+
+#sideNav li{
+  list-style: none;
+  padding: 12px 12px 5px 12px;
+  display: block;
+  width: 100px;
+  height: 30px;
+  border: 2px outset gray;
+  text-align: center;
+}
+
+#sideNav li a{
+  font-size: 1.3rem;
+  color: white;
+}
+
+#sideNav li:hover{
+  transform: scale(1.1);
+  transition: all 0.2s ease-in-out;
+  padding-right: 7px;
+}
+
+@media screen and (min-width: 650px){
+  #sideNav{
+    display: none !important;
+  }
+}
+
+
+
