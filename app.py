@@ -1,6 +1,5 @@
 from flask import Flask, redirect, url_for, render_template, request, flash, session
 from flask_bcrypt import Bcrypt
-from models.shared import db
 import os
 from forms import SignUpForm, LogInForm, EditForm, TradeForm, RateForm
 from flask_wtf import CsrfProtect
@@ -8,6 +7,7 @@ from functools import wraps
 import datetime
 from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user
 import re
+from models.shared import db
 
 app = Flask(__name__)
 app.url_map.strict_slashes = False
