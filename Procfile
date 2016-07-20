@@ -1,1 +1,1 @@
-web: gunicorn game-exchange.app
+web: app.py
