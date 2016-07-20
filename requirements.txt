@@ -13,6 +13,7 @@ Flask-Script==2.0.5
 Flask-SQLAlchemy==2.1
 Flask-WTF==0.12
 gnureadline==6.3.3
+gunicorn==19.6.0
 ipython==4.2.1
 ipython-genutils==0.1.0
 itsdangerous==0.24
