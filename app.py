@@ -221,7 +221,7 @@ def show(id):
     if rating.rec_id == id:
       user_rating.append(rating.stars)
   if (len(user_rating) > 0):
-    r = sum(user_rating)/len(user_rating)
+    r = round(sum(user_rating)/len(user_rating), 2)
   games = Game.query.all()
   return render_template('users/show.html',user=user, user2=user2, games=games, form=form, rateForm=rateForm, r=r)
 
