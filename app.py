@@ -3,18 +3,17 @@ from flask_bcrypt import Bcrypt
 import os
 from forms import SignUpForm, LogInForm, EditForm, TradeForm, RateForm
 from flask_wtf import CsrfProtect
-from functools import wraps
 import datetime
 from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user
-import re
 from models.shared import db
+import re
 
 app = Flask(__name__)
 app.url_map.strict_slashes = False
 bcrypt = Bcrypt(app)
 
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://localhost/game_exchange'
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'postgres://localhost/game_exchange')
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://localhost/game_exchange'
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.url_map.strict_slashes = False
