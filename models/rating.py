@@ -4,7 +4,7 @@ from models.shared import db
 
 class Rating(db.Model):
     __tablename__ = 'ratings'
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, unique=True)
     giv_id = db.Column(db.Integer)
     rec_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     stars = db.Column(db.Integer)
