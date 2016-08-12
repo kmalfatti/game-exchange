@@ -13,6 +13,7 @@ app.url_map.strict_slashes = False
 bcrypt = Bcrypt(app)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'postgres://localhost/game_exchange')
+
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://localhost/game_exchange'
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -259,7 +260,7 @@ def add_game():
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 3000))
-    # print(port)
+    print(port)
     # host = int(os.environ.get("HOST", '127.0.0.1'))
     app.run(host='0.0.0.0', port=port)
 
