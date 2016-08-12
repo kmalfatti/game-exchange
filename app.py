@@ -64,10 +64,6 @@ user_games = db.Table('user_games',
   db.Column('user_id', db.Integer, db.ForeignKey('users.id'))
 )
 
-user_rating = db.Table('user_ratings',
-  db.Column('id', db.Integer, primary_key=True),
-  db.Column('rec_id', db.Integer, db.ForeignKey('ratings.rec_id')),
-)
 
 @login_manager.user_loader
 def load_user(user_id):
