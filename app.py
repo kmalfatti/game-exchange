@@ -12,9 +12,8 @@ app = Flask(__name__)
 app.url_map.strict_slashes = False
 bcrypt = Bcrypt(app)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'postgres://localhost/game_exchange')
-
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://localhost/game_exchange'
+# app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'postgres://localhost/game_exchange')
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://localhost/game_exchange'
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.url_map.strict_slashes = False
@@ -198,7 +197,7 @@ def submit_rating(id, id2):
     flash('Nice try...You should get 1 star for that! :(')
     return redirect(url_for('show', id=user.id))
   flash('Thank you!')
-  new_rating=Rating(giv_id=id, rec_id=id2, stars=int(form.stars.data))
+  new_rating=Rating(giv_id=id, rec_id=id2, stars=int(form.stars.data), feedback=form.feedback.data)
   db.session.add(new_rating)
   db.session.commit()
   return redirect(url_for('show', id=user.id))

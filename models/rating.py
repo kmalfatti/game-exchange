@@ -8,9 +8,11 @@ class Rating(db.Model):
     giv_id = db.Column(db.Integer)
     rec_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     stars = db.Column(db.Integer)
+    feedback = db.Column(db.Text)
 
-def __init__(self, giv_id, rec_id, stars):
+def __init__(self, giv_id, rec_id, stars, feedback):
      self.giv_id = giv_id
      self.rec_id = rec_id
      self.stars = stars
+     self.feedback = feedback
 
