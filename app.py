@@ -12,8 +12,8 @@ app = Flask(__name__)
 app.url_map.strict_slashes = False
 bcrypt = Bcrypt(app)
 
-# app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'postgres://localhost/game_exchange')
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://localhost/game_exchange'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'postgres://localhost/game_exchange')
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://localhost/game_exchange'
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.url_map.strict_slashes = False
