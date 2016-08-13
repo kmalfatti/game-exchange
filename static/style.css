@@ -7,9 +7,6 @@
   text-align: center;
 }
 
-main{
-  /*min-height: 535px*/
-}
 
 
 /*============ NAV =============*/
@@ -125,6 +122,11 @@ h1 {
   font-size: 1.3rem;
 }
 /*======= END NAV ======*/
+
+#mainWrap{
+  margin: auto;
+  max-width: 1700px;
+}
 
 .welcome {
   margin: auto;
