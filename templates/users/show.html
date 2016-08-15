@@ -16,7 +16,14 @@
       <p><b>Rating: </b>{{r}}</p>
     </div>
     <div class="rightProfile">
-      <p><b>Bio: </b>{{user2.bio}}</p>
+      <p id="bio"><b>Bio: </b>{{user2.bio}}
+      {% if user.id == user2.id %}
+      <i class="fa fa-pencil-square-o edit-icon" aria-hidden="true"></i>
+      {% endif %}
+      </p>
+      <textarea name="" id="edit-box">{{user2.bio}}</textarea>
+      <button id="save">Save</button>
+      <button id="cancel">Cancel</button>
       <hr>
       <div class="gameList">
       <div class="owned">
@@ -24,19 +31,21 @@
           {% for game in games %}
             {% if (user2.id is equalto game.user_id) and (game.own is equalto True) %}
             <div class="own box">
+            {% if user != user2 %}
             <div class="overbox">
               <p class="hover">Request</p>
               <div class="sure">
-              <form action="{{url_for('trade', id=user2.id)}}" method="POST">
-                {{ form.csrf_token }}
-                <p>Are you sure you want to exchange {{game.name}}?</p>
-                {{ form.name(value=game.name) }}
-                {{ form.platform(value=game.platform) }}
-                <button class="yes" type="submit">Yes</button>
-                <p class="no">No</p>
-              </form>
+                <form action="{{url_for('trade', id=user2.id)}}" method="POST">
+                  {{ form.csrf_token }}
+                  <p>Are you sure you want to exchange {{game.name}}?</p>
+                  {{ form.name(value=game.name) }}
+                  {{ form.platform(value=game.platform) }}
+                  <button class="yes" type="submit">Yes</button>
+                  <p class="no">No</p>
+                </form>
+              </div>
             </div>
-            </div>
+            {% endif %}
             <p>{{game.name}}</p>
             <p>{{game.platform}}</p>
             <img src=https://res.cloudinary.com/igdb/image/upload/t_cover_big/{{game.cover}}.jpg>

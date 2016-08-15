@@ -157,6 +157,23 @@ $('#bars').click(function(){
     $('#sideNav').toggle('slow')
 })
 
+$('#bio').hover(function(){
+    $('.edit-icon').toggle('show')
+})
+
+
+$('.edit-icon').click(function(){
+    $('#edit-box').toggle('show')
+    $('#save').toggle('show')
+    $('#cancel').toggle('show')
+})
+
+$('#cancel').click(function(){
+    $('#edit-box').hide()
+    $('#save').hide()
+    $('#cancel').hide()
+})
+
 $(document).ready(function(){
     var path=window.location.pathname
     if (path==="/contact"){

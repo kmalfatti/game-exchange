@@ -602,6 +602,27 @@ text-align: center;
   }
 }
 
+.edit-icon{
+  color: black;
+  display: none;
+  float: right;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+#edit-box{
+  width: 99%;
+  display: none;
+}
+
+#cancel, #save{
+  display: none;
+}
+
+*{
+/*border: 1px solid red*/
+}
+
 
 /*==================*/
 /* END USER PROFILE */
