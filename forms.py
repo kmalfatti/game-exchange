@@ -26,3 +26,6 @@ class TradeForm(Form):
 class RateForm(Form):
   stars = HiddenField('stars')
   feedback = TextAreaField('feedback')
+
+class BioForm(Form):
+  bio = TextAreaField('bio')

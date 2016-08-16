@@ -166,12 +166,19 @@ $('.edit-icon').click(function(){
     $('#edit-box').toggle('show')
     $('#save').toggle('show')
     $('#cancel').toggle('show')
+    $('#edit-box').focus()
 })
 
 $('#cancel').click(function(){
     $('#edit-box').hide()
     $('#save').hide()
     $('#cancel').hide()
+})
+
+$(document).ready(function(){
+    if('#edit-box'){
+        $('#edit-box').val($('#bioText')[0].innerText)
+    }
 })
 
 $(document).ready(function(){

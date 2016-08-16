@@ -1,7 +1,7 @@
 from flask import Flask, redirect, url_for, render_template, request, flash, session
 from flask_bcrypt import Bcrypt
 import os
-from forms import SignUpForm, LogInForm, EditForm, TradeForm, RateForm
+from forms import SignUpForm, LogInForm, EditForm, TradeForm, RateForm, BioForm
 from flask_wtf import CsrfProtect
 import datetime
 from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user
@@ -152,11 +152,20 @@ def user_index():
 @app.route('/users/<int:id>', methods=['POST'])
 @login_required
 def trade(id):
+  user = User.query.get(session['user_id'])
   form = TradeForm()
+  bioForm = BioForm()
+  bioForm.bio.default = user.bio
   print('id', id)
   user2 = User.query.get(id)
   print('user2 username', user2.username)
-  user = User.query.get(session['user_id'])
+  if (bioForm.bio.data != bioForm.bio.default):
+    # from IPython import embed; embed()
+    print('hello')
+    user.bio = bioForm.bio.data
+    db.session.commit()
+    flash('Successfully Updated')
+    return redirect(url_for('show', id=user.id))
   findGame = user.games.all()
   foundGame = []
   for game in findGame:
@@ -205,11 +214,14 @@ def submit_rating(id, id2):
 @app.route('/users/<int:id>')
 @login_required
 def show(id):
+  user = User.query.get(int(session['user_id']))
+  print('biooooo', user.bio)
   form = TradeForm()
   rateForm = RateForm()
+  bioForm = BioForm()
+  # from IPython import embed; embed()
   r='Not Rated'
   user2 = User.query.get(id)
-  user = User.query.get(int(session['user_id']))
   ratings = Rating.query.all()
   user_rating = []
   for rating in ratings:
@@ -218,7 +230,7 @@ def show(id):
   if (len(user_rating) > 0):
     r = round(sum(user_rating)/len(user_rating), 2)
   games = Game.query.all()
-  return render_template('users/show.html',user=user, user2=user2, games=games, form=form, rateForm=rateForm, r=r)
+  return render_template('users/show.html',user=user, user2=user2, games=games, form=form, r=r, bioForm=bioForm)
 
 @app.route('/users/<int:id>/edit')
 def edit(id):

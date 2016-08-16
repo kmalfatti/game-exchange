@@ -16,13 +16,16 @@
       <p><b>Rating: </b>{{r}}</p>
     </div>
     <div class="rightProfile">
-      <p id="bio"><b>Bio: </b>{{user2.bio}}
+      <p id="bio"><b>Bio: </b><span id='bioText'>{{user2.bio}}</span>
       {% if user.id == user2.id %}
       <i class="fa fa-pencil-square-o edit-icon" aria-hidden="true"></i>
       {% endif %}
       </p>
-      <textarea name="" id="edit-box">{{user2.bio}}</textarea>
+      <form action="{{url_for('trade', id=user.id)}}" method="POST">
+         {{ bioForm.csrf_token }}
+         {{ bioForm.bio(id='edit-box', rows="5", default=bioForm.bio.default)}}
       <button id="save">Save</button>
+      </form>
       <button id="cancel">Cancel</button>
       <hr>
       <div class="gameList">
