@@ -217,7 +217,6 @@ def show(id):
   user = User.query.get(int(session['user_id']))
   print('biooooo', user.bio)
   form = TradeForm()
-  rateForm = RateForm()
   bioForm = BioForm()
   # from IPython import embed; embed()
   r='Not Rated'

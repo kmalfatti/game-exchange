@@ -615,8 +615,14 @@ text-align: center;
   display: none;
 }
 
-#cancel, #save{
+#save{
   display: none;
+  float: left;
+}
+
+#cancel{
+  display: none;
+  margin-left: 5px;
 }
 
 *{
