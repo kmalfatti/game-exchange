@@ -625,6 +625,11 @@ text-align: center;
   margin-left: 5px;
 }
 
+#save, #cancel{
+  border-radius: 5px;
+  background-color: rgb(235, 235, 235);
+}
+
 *{
 /*border: 1px solid red*/
 }

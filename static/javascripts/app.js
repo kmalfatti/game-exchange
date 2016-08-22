@@ -163,9 +163,9 @@ $('#bio').hover(function(){
 
 
 $('.edit-icon').click(function(){
-    $('#edit-box').toggle('show')
-    $('#save').toggle('show')
-    $('#cancel').toggle('show')
+    $('#edit-box').fadeToggle('show')
+    $('#save').fadeToggle('show')
+    $('#cancel').fadeToggle('show')
     $('#edit-box').focus()
 })
 
