@@ -7,7 +7,17 @@
   <h3>{{user2.username}}</h3>
     <div class="leftProfile">
       <div class="profPic">
-        <img src="{{user2.image}}" alt="Photo of {{user2.username}}">
+        <img class='profImg' src="{{user2.image}}" alt="Photo of {{user2.username}}">
+        <div class="div-img-icon">
+        {% if user.id == user2.id %}
+        <i class="fa fa-pencil-square-o edit-icon img-edit-icon fa-lg" aria-hidden="true"></i>
+        </div>
+        <form action="{{url_for('trade', id=user.id)}}" method="POST">
+         <input type="text" id="imgInput">
+        <button id="imgSave">Save</button>
+      </form>
+      <button id="imgCancel">Cancel</button>
+        {% endif %}
       </div>
       <p><b>Member since: </b><em>{{user2.date_joined.strftime('%m-%d-%Y')}}</em></p>
       <p><b>Location: </b>{{user2.location}}</p>
@@ -18,15 +28,15 @@
     <div class="rightProfile">
       <p id="bio"><b>Bio: </b><span id='bioText'>{{user2.bio}}</span>
       {% if user.id == user2.id %}
-      <i class="fa fa-pencil-square-o edit-icon" aria-hidden="true"></i>
-      {% endif %}
+      <i class="fa fa-pencil-square-o edit-icon bio-edit-icon" aria-hidden="true"></i>
       </p>
       <form action="{{url_for('trade', id=user.id)}}" method="POST">
          {{ bioForm.csrf_token }}
          {{ bioForm.bio(id='edit-box', rows="5", default=bioForm.bio.default)}}
-      <button id="save">Save</button>
+      <button id="bioSave">Save</button>
       </form>
-      <button id="cancel">Cancel</button>
+      <button id="bioCancel">Cancel</button>
+      {% endif %}
       <hr>
       <div class="gameList">
       <div class="owned">

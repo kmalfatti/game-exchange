@@ -158,27 +158,44 @@ $('#bars').click(function(){
 })
 
 $('#bio').hover(function(){
-    $('.edit-icon').toggle('show')
+    $('.bio-edit-icon').toggle('show')
 })
 
 
-$('.edit-icon').click(function(){
+$('.bio-edit-icon').click(function(){
     $('#edit-box').fadeToggle('show')
-    $('#save').fadeToggle('show')
-    $('#cancel').fadeToggle('show')
+    $('#bioSave').fadeToggle('show')
+    $('#bioCancel').fadeToggle('show')
     $('#edit-box').focus()
 })
 
-$('#cancel').click(function(){
+$('#bioCancel').click(function(){
     $('#edit-box').hide()
-    $('#save').hide()
-    $('#cancel').hide()
+    $('#bioSave').hide()
+    $('#bioCancel').hide()
 })
 
 $(document).ready(function(){
     if('#edit-box'){
         $('#edit-box').val($('#bioText')[0].innerText)
     }
+})
+
+$('.profPic').hover(function(){
+    $('.img-edit-icon').toggle('show')
+})
+
+$('.img-edit-icon').click(function(){
+    $('#imgInput').fadeToggle('show')
+    $('#imgSave').fadeToggle('show')
+    $('#imgCancel').fadeToggle('show')
+    $('#imgInput').focus()
+})
+
+$('#imgCancel').click(function(){
+    $('#imgInput').hide()
+    $('#imgSave').hide()
+    $('#imgCancel').hide()
 })
 
 $(document).ready(function(){

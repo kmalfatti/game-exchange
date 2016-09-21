@@ -29,3 +29,6 @@ class RateForm(Form):
 
 class BioForm(Form):
   bio = TextAreaField('bio')
+
+# class ImageForm(Form):
+#   imgForm = StringField('image')
