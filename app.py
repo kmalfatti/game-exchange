@@ -156,9 +156,7 @@ def editimg(id):
   print('test image def')
   imgForm = ImageForm()
   imgForm.img.default = "../static/images/crash.jpg"
-  print(User.query.get(id))
   if (imgForm.img.data != imgForm.img.default):
-    print('hmm', imgForm.img.data)
     if (imgForm.img.data == ""):
       user.image = imgForm.img.default
       db.session.commit()
