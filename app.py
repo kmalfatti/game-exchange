@@ -1,7 +1,7 @@
 from flask import Flask, redirect, url_for, render_template, request, flash, session
 from flask_bcrypt import Bcrypt
 import os
-from forms import SignUpForm, LogInForm, EditForm, TradeForm, RateForm, BioForm
+from forms import SignUpForm, LogInForm, EditForm, TradeForm, RateForm, BioForm, ImageForm
 from flask_wtf import CsrfProtect
 import datetime
 from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user
@@ -12,8 +12,8 @@ app = Flask(__name__)
 app.url_map.strict_slashes = False
 bcrypt = Bcrypt(app)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'postgres://localhost/game_exchange')
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://localhost/game_exchange'
+app.config['SQLALCHEMY_DATABASE_URI']=os.environ.get('DATABASE_URL', 'postgres://localhost/game_exchange')
+# app.config['SQLALCHEMY_DATABASE_URI']='postgres://localhost/game_exchange'
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.url_map.strict_slashes = False
@@ -149,23 +149,44 @@ def user_index():
   games = Game.query.all()
   return render_template('users/index.html', user=user, user_games=user_games, games=games)
 
+@app.route('/users/<int:id>/editimg', methods=['POST'])
+@login_required
+def editimg(id):
+  user = User.query.get(session['user_id'])
+  print('test image def')
+  imgForm = ImageForm()
+  imgForm.img.default = "../static/images/crash.jpg"
+  print(User.query.get(id))
+  if (imgForm.img.data != imgForm.img.default):
+    print('hmm', imgForm.img.data)
+    if (imgForm.img.data == ""):
+      user.image = imgForm.img.default
+      db.session.commit()
+      flash('Image Successfully Updated')
+      return redirect(url_for('show', id=user.id))
+    user.image = imgForm.img.data
+    db.session.commit()
+    flash('Image Successfully Updated')
+    return redirect(url_for('show', id=user.id))
+
+@app.route('/users/<int:id>/editbio', methods=['POST'])
+@login_required
+def editbio(id):
+  user = User.query.get(session['user_id'])
+  bioForm = BioForm()
+  bioForm.bio.default = user.bio
+  if (bioForm.bio.data != bioForm.bio.default):
+    user.bio = bioForm.bio.data
+    db.session.commit()
+    flash('Bio Successfully Updated')
+    return redirect(url_for('show', id=user.id))
+
 @app.route('/users/<int:id>', methods=['POST'])
 @login_required
 def trade(id):
   user = User.query.get(session['user_id'])
   form = TradeForm()
-  bioForm = BioForm()
-  bioForm.bio.default = user.bio
-  print('id', id)
   user2 = User.query.get(id)
-  print('user2 username', user2.username)
-  if (bioForm.bio.data != bioForm.bio.default):
-    # from IPython import embed; embed()
-    print('hello')
-    user.bio = bioForm.bio.data
-    db.session.commit()
-    flash('Successfully Updated')
-    return redirect(url_for('show', id=user.id))
   findGame = user.games.all()
   foundGame = []
   for game in findGame:
@@ -185,6 +206,8 @@ def trade(id):
   else:
     flash('Error')
   return redirect(url_for('show', id=user.id, form=form, user2=user2))
+
+
 
 @app.route('/users/<int:id>/rate/<int:id2>')
 @login_required
@@ -215,12 +238,14 @@ def submit_rating(id, id2):
 @login_required
 def show(id):
   user = User.query.get(int(session['user_id']))
-  print('biooooo', user.bio)
+  print('biooooo', user)
   form = TradeForm()
   bioForm = BioForm()
-  # from IPython import embed; embed()
+  imgForm = ImageForm()
   r='Not Rated'
   user2 = User.query.get(id)
+  print(user2)
+  # from IPython import embed; embed()
   ratings = Rating.query.all()
   user_rating = []
   for rating in ratings:
@@ -229,7 +254,7 @@ def show(id):
   if (len(user_rating) > 0):
     r = round(sum(user_rating)/len(user_rating), 2)
   games = Game.query.all()
-  return render_template('users/show.html',user=user, user2=user2, games=games, form=form, r=r, bioForm=bioForm)
+  return render_template('users/show.html',user=user, user2=user2, games=games, form=form, r=r, bioForm=bioForm, imgForm=imgForm)
 
 @app.route('/users/<int:id>/edit')
 def edit(id):

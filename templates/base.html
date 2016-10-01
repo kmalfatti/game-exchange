@@ -33,7 +33,7 @@
   <aside class="aside">
       <a id='logout' href="{{url_for('logout')}}">Logout</a>
       
-      <a id='navImgLink' href="{{url_for('show', id=session['user_id'])}}"><img id='navImg' src="{{ url_for('static', filename=user.image)}}" alt="{{user.username}}"></a>
+      <a id='navImgLink' href="{{url_for('show', id=session['user_id'])}}"><img id='navImg' src="{{ user.image}}" alt="{{user.username}}"></a>
   </aside>
   
   {% else %}

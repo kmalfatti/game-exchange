@@ -198,6 +198,24 @@ $('#imgCancel').click(function(){
     $('#imgCancel').hide()
 })
 
+// $('#imgSave').click(function(){
+//     $('#edit-box').val === $('#bioText').text()
+//     $('#image-form').submit()
+// })
+
+// $('#bioSave').click(function(){
+//     // $('#imgInput').val($('.profImg')[0].src)
+//     //     console.log('yo')
+//     // if ($('#imgInput').val()===window.location.origin+'/static/images/crash.jpg'){
+//     //     $('#imgInput').val('../static/images/crash.jpg')
+//     //     console.log($('#imgInput').val())
+//     // }
+//     $("image-form").submit(function(e){
+//         stopEvent(e);
+//     })
+//     $('#bio-form').submit()
+// })
+
 $(document).ready(function(){
     var path=window.location.pathname
     if (path==="/contact"){
