@@ -205,8 +205,6 @@ def trade(id):
     flash('Error')
   return redirect(url_for('show', id=user.id, form=form, user2=user2))
 
-
-
 @app.route('/users/<int:id>/rate/<int:id2>')
 @login_required
 def rate(id, id2):

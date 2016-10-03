@@ -14,7 +14,7 @@
         </div>
         <form action="{{url_for('editimg', id=user.id)}}" method="POST" id='image-form'>
          {{ imgForm.csrf_token }}
-         {{ imgForm.img(id='imgInput') }}
+         {{ imgForm.img(id='imgInput', placeholder=' Link to your image') }}
         <button id="imgSave">Save</button>
       </form>
       <button id="imgCancel">Cancel</button>
@@ -27,16 +27,18 @@
       <p><b>Rating: </b>{{r}}</p>
     </div>
     <div class="rightProfile">
-      <p id="bio"><b>Bio: </b><span id='bioText'>{{user2.bio}}</span>
-      {% if user.id == user2.id %}
-      <i class="fa fa-pencil-square-o edit-icon bio-edit-icon" aria-hidden="true"></i>
-      </p>
-      <form action="{{url_for('editbio', id=user.id)}}" method="POST" id="bio-form">
-         {{ bioForm.csrf_token }}
-         {{ bioForm.bio(id='edit-box', rows="5", default=bioForm.bio.default)}}
-      <button id="bioSave">Save</button>
-      </form>
-      <button id="bioCancel">Cancel</button>
+      <div class="bioDiv">
+        <p id="bio"><b>Bio: </b><span id='bioText'>{{user2.bio}}</span>
+        {% if user.id == user2.id %}
+        <i class="fa fa-pencil-square-o edit-icon bio-edit-icon" aria-hidden="true"></i>
+        </p>
+        <form action="{{url_for('editbio', id=user.id)}}" method="POST" id="bio-form">
+           {{ bioForm.csrf_token }}
+           {{ bioForm.bio(id='edit-box', rows="5", default=bioForm.bio.default)}}
+        <button id="bioSave">Save</button>
+        </form>
+        <button id="bioCancel">Cancel</button>
+      </div>
       {% endif %}
       <hr>
       <div class="gameList">

@@ -157,10 +157,13 @@ $('#bars').click(function(){
     $('#sideNav').toggle('slow')
 })
 
-$('#bio').hover(function(){
-    $('.bio-edit-icon').toggle('show')
+$('.bioDiv').mouseenter(function(){
+    $('.bio-edit-icon').stop()
+    $('.bio-edit-icon').fadeIn()
 })
-
+$('.bioDiv').mouseleave(function(){
+    $('.bio-edit-icon').fadeOut()
+})
 
 $('.bio-edit-icon').click(function(){
     $('#edit-box').fadeToggle('show')
@@ -181,8 +184,13 @@ $(document).ready(function(){
     }
 })
 
-$('.profPic').hover(function(){
-    $('.img-edit-icon').toggle('show')
+$('.profPic').mouseenter(function(){
+    $('.img-edit-icon').stop()
+    $('.img-edit-icon').fadeIn()
+})
+
+$('.profPic').mouseleave(function(){
+    $('.img-edit-icon').fadeOut()
 })
 
 $('.img-edit-icon').click(function(){
