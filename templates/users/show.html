@@ -61,6 +61,21 @@
                 </form>
               </div>
             </div>
+            {% else %}
+            <div class="deleteBox">
+              <p class="hover">x</p>
+              <div class="delsure">
+                <form action="{{url_for('deletegame', id=user2.id)}}" method="POST">
+                  {{ delForm.csrf_token }}
+                  <p>Are you sure you want to delete {{game.name}}?</p>
+                  {{ delForm.own(value='True') }}
+                  {{ delForm.name(value=game.name) }}
+                  {{ delForm.platform(value=game.platform) }}
+                  <button class="yes" type="submit">Yes</button>
+                  <p class="no">No</p>
+                </form>
+              </div>
+            </div>
             {% endif %}
             <p>{{game.name}}</p>
             <p>{{game.platform}}</p>
@@ -73,7 +88,23 @@
           <h4>Games {{user2.username}} Wants:</h4>
           {% for game in games %}
             {% if (user2.id is equalto game.user_id) and (game.own is equalto False) %}
-            <div class="want">
+            <div class="box want">
+            {% if user == user2 %}
+            <div class="deleteBox">
+              <p class="hover">x</p>
+              <div class="delsure">
+                <form action="{{url_for('deletegame', id=user2.id)}}" method="POST">
+                  {{ delForm.csrf_token }}
+                  <p>Are you sure you want to delete {{game.name}}?</p>
+                  {{ delForm.own(value='False') }}
+                  {{ delForm.name(value=game.name) }}
+                  {{ delForm.platform(value=game.platform) }}
+                  <button class="yes" type="submit">Yes</button>
+                  <p class="no">No</p>
+                </form>
+              </div>
+            </div>
+            {% endif %}
             <p>{{game.name}}</p>
             <p>{{game.platform}}</p>
             <img src=https://res.cloudinary.com/igdb/image/upload/t_cover_big/{{game.cover}}.jpg>

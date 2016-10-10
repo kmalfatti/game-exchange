@@ -1,7 +1,7 @@
 from flask import Flask, redirect, url_for, render_template, request, flash, session
 from flask_bcrypt import Bcrypt
 import os
-from forms import SignUpForm, LogInForm, EditForm, TradeForm, RateForm, BioForm, ImageForm
+from forms import SignUpForm, LogInForm, EditForm, TradeForm, RateForm, BioForm, ImageForm, DeleteForm
 from flask_wtf import CsrfProtect
 import datetime
 from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user
@@ -179,6 +179,20 @@ def editbio(id):
     flash('Bio Successfully Updated')
     return redirect(url_for('show', id=user.id))
 
+@app.route('/users/<int:id>/deletegame', methods=['POST'])
+@login_required
+def deletegame(id):
+  user = User.query.get(session['user_id'])
+  delForm = DeleteForm()
+  delForm.own.data = (delForm.own.data == 'True')
+  findGame = user.games.all()
+  for game in findGame:
+    if game.name == delForm.name.data and game.platform == delForm.platform.data and game.own == delForm.own.data:
+      db.session.delete(game)
+      db.session.commit()
+      flash('Successfully Deleted ' + game.name)
+  return redirect(url_for('show', id=user.id))
+
 @app.route('/users/<int:id>', methods=['POST'])
 @login_required
 def trade(id):
@@ -236,6 +250,7 @@ def show(id):
   user = User.query.get(int(session['user_id']))
   print('biooooo', user)
   form = TradeForm()
+  delForm = DeleteForm()
   bioForm = BioForm()
   imgForm = ImageForm()
   r='Not Rated'
@@ -250,7 +265,7 @@ def show(id):
   if (len(user_rating) > 0):
     r = round(sum(user_rating)/len(user_rating), 2)
   games = Game.query.all()
-  return render_template('users/show.html',user=user, user2=user2, games=games, form=form, r=r, bioForm=bioForm, imgForm=imgForm)
+  return render_template('users/show.html',user=user, user2=user2, games=games, form=form, r=r, bioForm=bioForm, imgForm=imgForm, delForm=delForm)
 
 @app.route('/users/<int:id>/edit')
 def edit(id):

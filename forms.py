@@ -32,3 +32,8 @@ class BioForm(Form):
 
 class ImageForm(Form):
   img = StringField('image')
+
+class DeleteForm(Form):
+  own = HiddenField('own')
+  name = HiddenField('name')
+  platform = HiddenField('platform')

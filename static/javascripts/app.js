@@ -108,8 +108,8 @@ $('.hover').on('click',function(e){
     $(e.target).next().show()
 })
 
-$('.sure').on('click', function(){
-    $('.sure').fadeOut()
+$('.no').on('click', function(){
+    $('.sure, .delsure').fadeOut()
 })
 
 $('.1star').on('click', function(){
