@@ -297,7 +297,7 @@ def add_game():
     new_game = Game(name, user.id, game_id, cover, own, platform)
     db.session.add(new_game)
     db.session.commit()
-    flash('Successfully Added Game')
+    flash('Successfully Added '+new_game.name)
     return render_template('search.html', user=user)
 
 if __name__ == '__main__':

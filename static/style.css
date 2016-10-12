@@ -579,29 +579,6 @@ text-align: center;
   margin: 5px 0;
 }
 
-
-@media (max-width: 650px){
-  .leftProfile{
-    width: 100%;
-    margin: 0 auto;
-    float: left;
-    max-width: 100%
-
-  }
-  .rightProfile{
-    width: 100%;
-    margin: 0 auto;
-    float: left;
-  }
-  .leftProfile img{
-    width: 70%; 
-  }
-
-  .profPic{
-    text-align: center;
-  }
-}
-
 .profPic{
   position: relative;
   z-index: 0;
@@ -662,6 +639,129 @@ text-align: center;
 .div-img-icon {
   margin-top: -25px;
   height: 22px;
+}
+.trade{
+  padding-bottom: 25px;
+}
+
+.box .overbox{
+  background-color: black;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  -webkit-transition: all 300ms ease-out;
+  -moz-transition: all 300ms ease-out;
+  -o-transition: all 300ms ease-out;
+  -ms-transition: all 300ms ease-out;
+  transition: all 300ms ease-out;
+  opacity: 0;
+  width: 72%;
+  border-radius: 10px;
+  padding: 10%;
+  margin-top: 50%;
+  text-align: center;
+}
+
+.box .deleteBox{
+  background-color: black;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+  -webkit-transition: all 300ms ease-out;
+  -moz-transition: all 300ms ease-out;
+  -o-transition: all 300ms ease-out;
+  -ms-transition: all 300ms ease-out;
+  transition: all 300ms ease-out;
+  opacity: 0;
+  width: 30px;
+  border-radius: 10px;
+  height: 30px;
+  padding: 4px 10px 10px 10px;
+  margin: 20px 20px 0 0;
+  text-align: center;
+}
+
+.box:hover .overbox{ 
+  opacity: .9; 
+}
+
+.box:hover .deleteBox{ 
+  opacity: .9; 
+}
+
+.hover{
+  color:white;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+.sure, .delsure{
+  display: none;
+  position: absolute;
+  background-color: rgb(240, 240, 240);
+  border-radius: 5px;
+  border: 4px solid black;
+  margin: auto;
+  position: absolute;
+  left: 0;right: 0;
+  padding: 10px;
+  z-index: 2;
+}
+
+.delsure{
+  left: auto;
+  width: 150px;
+}
+
+.yes{
+  border-radius: 5px;
+  border: 1px solid black;
+  background-color: rgb(240,240,240);
+  display: inline-block;
+  padding: 2px 4px;
+  cursor: pointer;
+  outline: none;
+}
+
+.no{
+  height: 18px;
+  display: inline-block;
+  border-radius: 5px;
+  border: 1px solid black;
+  padding: 2px 4px;
+  cursor: pointer
+}
+
+@media (max-width: 650px){
+  .leftProfile{
+    width: 100%;
+    margin: 0 auto;
+    float: left;
+    max-width: 100%
+
+  }
+  .rightProfile{
+    width: 100%;
+    margin: 0 auto;
+    float: left;
+  }
+  .leftProfile img{
+    width: 70%; 
+  }
+  .profPic img{
+    display: block;
+    margin: auto;
+  }
+  .profPic form{
+    display: block;
+    margin: 3px auto;
+    width: 70%;
+  }
+  .deleteBox{
+    margin-right: 0;
+  }
 }
 
 
@@ -778,101 +878,6 @@ hr{
 /*==================*/
 /*    END Search    */
 /*==================*/
-
-.trade{
-  padding-bottom: 25px;
-}
-
-.box .overbox{
-  background-color: black;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 1;
-  -webkit-transition: all 300ms ease-out;
-  -moz-transition: all 300ms ease-out;
-  -o-transition: all 300ms ease-out;
-  -ms-transition: all 300ms ease-out;
-  transition: all 300ms ease-out;
-  opacity: 0;
-  width: 72%;
-  border-radius: 10px;
-  padding: 10%;
-  margin-top: 50%;
-  text-align: center;
-}
-
-.box .deleteBox{
-  background-color: black;
-  position: absolute;
-  top: 0;
-  right: 0;
-  z-index: 1;
-  -webkit-transition: all 300ms ease-out;
-  -moz-transition: all 300ms ease-out;
-  -o-transition: all 300ms ease-out;
-  -ms-transition: all 300ms ease-out;
-  transition: all 300ms ease-out;
-  opacity: 0;
-  width: 30px;
-  border-radius: 10px;
-  height: 30px;
-  padding: 4px 10px 10px 10px;
-  margin: 20px 20px 0 0;
-  text-align: center;
-}
-
-.box:hover .overbox{ 
-  opacity: .9; 
-}
-
-.box:hover .deleteBox{ 
-  opacity: .9; 
-}
-
-.hover{
-  color:white;
-  font-size: 1.4rem;
-  cursor: pointer;
-}
-
-.sure, .delsure{
-  display: none;
-  position: absolute;
-  background-color: rgb(240, 240, 240);
-  border-radius: 5px;
-  border: 4px solid black;
-  margin: auto;
-  position: absolute;
-  left: 0;right: 0;
-  padding: 10px;
-  z-index: 2;
-}
-
-.delsure{
-  left: auto;
-  width: 150px;
-}
-
-.yes{
-  border-radius: 5px;
-  border: 1px solid black;
-  background-color: rgb(240,240,240);
-  display: inline-block;
-  padding: 2px 4px;
-  cursor: pointer;
-  outline: none;
-}
-
-.no{
-  height: 18px;
-  display: inline-block;
-  border-radius: 5px;
-  border: 1px solid black;
-  padding: 2px 4px;
-  cursor: pointer
-}
-
 
 .stars *{
   display: inline-block;
