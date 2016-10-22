@@ -254,8 +254,13 @@ def show(id):
   bioForm = BioForm()
   imgForm = ImageForm()
   r='Not Rated'
-  user2 = User.query.get(id)
+  try:
+    user2 = User.query.get(id)
+  except:
+    user2 = None
   print(user2)
+  if (user2==None):
+    return render_template('errors/user.html', user=user)
   # from IPython import embed; embed()
   ratings = Rating.query.all()
   user_rating = []
@@ -299,6 +304,11 @@ def add_game():
     db.session.commit()
     flash('Successfully Added '+new_game.name)
     return render_template('search.html', user=user)
+
+@app.errorhandler(404)
+def page_not_found(err):
+    user = User.query.get(int(session['user_id']))
+    return render_template('errors/404.html', user=user), 404
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 3000))

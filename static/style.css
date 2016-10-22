@@ -943,6 +943,17 @@ hr{
   }
 }
 
+/*==============*/
+/*   404 page   */
+/*==============*/
 
+.error-img{
+  display: block;
+  margin: 0 auto;
+  max-width: 500px;
+}
 
+.error-user{
+  max-width: 300px;
+}
 
