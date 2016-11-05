@@ -599,17 +599,17 @@ text-align: center;
   display: none;
 }
 
-#bioSave, #imgSave{
+#bioSave, #imgSave, #emailSave{
   display: none;
   float: left;
 }
 
-#bioCancel, #imgCancel{
+#bioCancel, #imgCancel, #emailCancel{
   display: none;
   margin-left: 5px;
 }
 
-#bioSave, #bioCancel, #imgSave, #imgCancel{
+#bioSave, #bioCancel, #imgSave, #imgCancel, #emailSave, #emailCancel{
   border-radius: 5px;
   background-color: rgb(235, 235, 235);
   cursor: pointer;
@@ -617,6 +617,13 @@ text-align: center;
 
 #bio{
   padding: 15px 0;
+}
+
+#email-form{
+  display: none;
+  width: 98%;
+  border: 1px solid gray;
+  border-radius: 2px;
 }
 
 #imgInput{

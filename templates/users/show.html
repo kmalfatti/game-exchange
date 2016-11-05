@@ -21,10 +21,20 @@
         {% endif %}
       </div>
       <p><b>Member since: </b><em>{{user2.date_joined.strftime('%m-%d-%Y')}}</em></p>
-      <p><b>Location: </b>{{user2.location}}</p>
-      <p><b>Email: </b>{{user2.email}}</p>
-      <p><b>Cred: </b>{{user2.cred}}</p>
       <p><b>Rating: </b>{{r}}</p>
+      <p><b>Cred: </b>{{user2.cred}}</p>
+      <div class="emailDiv">
+        <p><b>Email: </b><span id="emailText">{{user2.email}}</span>
+        <i class="fa fa-pencil-square-o edit-icon email-edit-icon" aria-hidden="true"></i>
+        </p>
+        <form action="{{url_for('editemail', id=user.id)}}" method="POST">
+          {{ emailForm.csrf_token }}
+          {{ emailForm.email(id='email-form', placeholder='Email') }}
+          <button id="emailSave">Save</button>
+        </form>
+        <button id="emailCancel">Cancel</button>
+      </div>
+      <p><b>Location: </b>{{user2.location}}</p>
     </div>
     <div class="rightProfile">
       <div class="bioDiv">

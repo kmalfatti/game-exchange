@@ -12,12 +12,12 @@ class LogInForm(Form):
   username = StringField('username', validators=[DataRequired()])
   password = PasswordField('password', validators=[Length(min=6)])
 
-class EditForm(Form):
-  password = PasswordField('password', validators=[Length(min=6)])
-  email = StringField('Email', validators=[Email()])
-  bio = StringField('bio')
-  location = StringField('location')
-  image = StringField('image')
+# class EditForm(Form):
+#   password = PasswordField('password', validators=[Length(min=6)])
+#   email = StringField('Email', validators=[Email()])
+#   bio = StringField('bio')
+#   location = StringField('location')
+#   image = StringField('image')
 
 class TradeForm(Form):
   name = HiddenField('name')
@@ -37,3 +37,7 @@ class DeleteForm(Form):
   own = HiddenField('own')
   name = HiddenField('name')
   platform = HiddenField('platform')
+
+class EmailForm(Form):
+  email = StringField('Email', validators=[Email()])
+  

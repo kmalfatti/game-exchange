@@ -178,11 +178,45 @@ $('#bioCancel').click(function(){
     $('#bioCancel').hide()
 })
 
+$('.emailDiv').mouseenter(function(){
+    $('.email-edit-icon').stop()
+    $('.email-edit-icon').fadeIn()
+})
+$('.emailDiv').mouseleave(function(){
+    $('.email-edit-icon').fadeOut()
+})
+
+$('.email-edit-icon').click(function(){
+    $('#email-form').fadeToggle('show')
+    $('#emailSave').fadeToggle('show')
+    $('#emailCancel').fadeToggle('show')
+    $('#email-form').focus()
+})
+
+$('#emailCancel').click(function(){
+    $('#email-form').hide()
+    $('#emailSave').hide()
+    $('#emailCancel').hide()
+})
+
 $(document).ready(function(){
-    if('#edit-box'){
+    if($('#edit-box').length){
         $('#edit-box').val($('#bioText')[0].innerText)
     }
 })
+
+$(document).ready(function(){
+    if($('#email-form').length){
+        $('#email-form').val($('#emailText')[0].innerText)
+    }
+})
+
+$(document).ready(function(){
+    if($('.flash').children().text().includes('Error')){
+        $('.flash').children().css('color', 'red')
+    }
+})
+
 
 $('.profPic').mouseenter(function(){
     $('.img-edit-icon').stop()
