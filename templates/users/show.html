@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
 <main>
   <div class="profWrapper animated fadeIn">
   <h3>{{user2.username}}</h3>
@@ -35,6 +34,7 @@
         <button id="emailCancel">Cancel</button>
       </div>
       <p><b>Location: </b>{{user2.location}}</p>
+      <div id="map"></div>
     </div>
     <div class="rightProfile">
       <div class="bioDiv">

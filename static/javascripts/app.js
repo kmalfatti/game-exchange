@@ -240,6 +240,18 @@ $('#imgCancel').click(function(){
     $('#imgCancel').hide()
 })
 
+function initMap() {
+    var uluru = {lat: 37.7749, lng: -122.4194};
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 10,
+      center: uluru
+    });
+    var marker = new google.maps.Marker({
+      position: uluru,
+      map: map
+    });
+}
+
 $(document).ready(function(){
     var path=window.location.pathname
     if (path==="/contact"){
