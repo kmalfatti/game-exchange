@@ -11,10 +11,9 @@
 
   <title>Game Exchange</title>
 </head>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkPcTWILmnQuPx36SiRabXumw1eKsppBg&callback=initMap">
-</script>
 <script type=text/javascript src="{{ url_for('static', filename='javascripts/jquery-1.8.1.js') }}"></script>
 <body>
+<script type=text/javascript src="{{ url_for('static', filename='javascripts/app.js') }}"></script>
 <header>
   <nav class="top-nav">
     <div>
@@ -74,8 +73,7 @@
 
   {% block content %}
   {% endblock %}
-
-<script type=text/javascript src="{{ url_for('static', filename='javascripts/app.js') }}"></script>
+  
 </body>
 </html>
 
