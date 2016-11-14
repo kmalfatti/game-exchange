@@ -24,6 +24,7 @@
       <p><b>Cred: </b>{{user2.cred}}</p>
       <div class="emailDiv">
         <p><b>Email: </b><span id="emailText">{{user2.email}}</span>
+        {% if user.id == user2.id %}
         <i class="fa fa-pencil-square-o edit-icon email-edit-icon" aria-hidden="true"></i>
         </p>
         <form action="{{url_for('editemail', id=user.id)}}" method="POST">
@@ -32,9 +33,24 @@
           <button id="emailSave">Save</button>
         </form>
         <button id="emailCancel">Cancel</button>
+        {% else %}
+        </p>
+        {% endif %}
       </div>
-      <p><b>Location: </b>{{user2.location}}</p>
-      <div id="map"></div>
+      <div class="locationDiv">
+        <p><b>Location: </b><span id="location">{{user2.location}}</span>
+        {% if user.id == user2.id %}
+        <i class="fa fa-pencil-square-o edit-icon location-edit-icon" aria-hidden="true"></i>
+        </p>
+        <p id="drag">Drag the marker to your approximate location, then click the 'Save' button</p>
+        <button id="locationSave">Save</button>
+        <button id="locationCancel">Cancel</button>
+        {% else %}
+        </p>
+        {% endif %}
+        <div id="map"></div>
+        <input type="text" id="mapSearchInput">
+      </div>
     </div>
     <div class="rightProfile">
       <div class="bioDiv">
@@ -49,6 +65,8 @@
         </form>
         <button id="bioCancel">Cancel</button>
       </div>
+      {% else %}
+      </p>
       {% endif %}
       <hr>
       <div class="gameList">
@@ -144,14 +162,92 @@
     function initMap() {
         var uluru = {lat: 37.7749, lng: -122.4194};
         var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 10,
-          center: uluru
+          zoom: 14,
+          center: uluru,
+          scrollwheel: false
         });
-        var marker = new google.maps.Marker({
-          position: uluru,
-          map: map
+        console.log(map)
+        // var marker = new google.maps.Marker({
+        //   position: uluru,
+        //   map: map
+        // });
+        var marker = new google.maps.Marker({ 
+          map:map,
+          draggable:false,
+          animation: google.maps.Animation.DROP,
+          position: uluru
         });
-    }
+        $('.location-edit-icon').click(function(){
+          $('#drag').fadeToggle('show')
+          $('#locationSave').fadeToggle('show')
+          $('#locationCancel').fadeToggle('show')
+          marker.setDraggable(!marker.draggable)
+        })
+        $('#locationCancel').click(function(){
+          $('#drag').hide()
+          $('#locationSave').hide()
+          $('#locationCancel').hide()
+          marker.setDraggable(false)
+          marker.setPosition(uluru)
+          geocodePosition(marker.getPosition())
+          map.setCenter(uluru)
+        })
+          google.maps.event.addListener(marker, 'dragend',function(){
+            // console.log(marker)
+              console.log(marker.getPosition().lat());
+              console.log(marker.getPosition().lng());
+              geocodePosition(marker.getPosition())
+            });
+          function geocodePosition(pos) 
+{
+   geocoder = new google.maps.Geocoder();
+   geocoder.geocode({
+        latLng: pos
+    }, 
+        function(results, status){
+            var city
+            var state
+            var country
+            if (status == google.maps.GeocoderStatus.OK){
+              results[0].address_components.forEach(function(el){
+                if (el.types[0] == 'locality'){
+                  city = el.long_name
+                }
+                if (el.types[0] == 'administrative_area_level_1'){
+                  state = el.short_name
+                }
+                if (el.types[0] == 'country'){
+                  country = el.long_name
+                }
+              }) 
+              if (!city && !state){
+                $('#location').text(country)
+
+              }
+              else if (!city){
+                console.log(state + ', ' + country)
+                $('#location').text(state + ', ' + country)
+              }
+              else{
+                console.log(city + ', ' + state)
+                $('#location').text(city + ', ' + state)
+
+              }
+                $("#mapSearchInput").val(results[0].formatted_address);
+                console.log('ocean test', results[0])
+                // console.log('ac', results[0].address_components[3].long_name + ', ' + results[0].address_components[5].short_name)
+                console.log(results[0].address_components)
+                $("#mapErrorMsg").hide(100);
+            } 
+            else 
+            {
+                $("#mapErrorMsg").html('Cannot determine address at this location.'+status).show(100);
+            }
+  console.log(geocoder.geocode)
+        }
+    );
+}
+}
 </script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkPcTWILmnQuPx36SiRabXumw1eKsppBg&callback=initMap">
 </script>

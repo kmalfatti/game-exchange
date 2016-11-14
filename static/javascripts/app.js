@@ -240,6 +240,20 @@ $('#imgCancel').click(function(){
     $('#imgCancel').hide()
 })
 
+$('.locationDiv').mouseenter(function(){
+    $('.location-edit-icon').stop()
+    $('.location-edit-icon').fadeIn()
+})
+
+$('.locationDiv').mouseleave(function(){
+    $('.location-edit-icon').fadeOut()
+})
+
+// $('.location-edit-icon').click(function(){
+//     $('#drag').fadeToggle('show')
+//     google.maps.Marker.setDraggable(true)
+// })
+
 $(document).ready(function(){
     var path=window.location.pathname
     if (path==="/contact"){
