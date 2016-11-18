@@ -55,7 +55,6 @@
         </p>
         {% endif %}
         <div id="map"></div>
-        <input type="text" id="mapSearchInput">
       </div>
     </div>
     <div class="rightProfile">
@@ -245,11 +244,6 @@
                 $('#location').text(city + ', ' + state)
                 $('#loc').val(city + ', ' + state)
               }
-                $("#mapSearchInput").val(results[0].formatted_address);
-                console.log('ocean test', results[0])
-                // console.log('ac', results[0].address_components[3].long_name + ', ' + results[0].address_components[5].short_name)
-                console.log(results[0].address_components)
-                $("#mapErrorMsg").hide(100);
             } 
             else 
             {
