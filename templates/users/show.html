@@ -43,7 +43,13 @@
         <i class="fa fa-pencil-square-o edit-icon location-edit-icon" aria-hidden="true"></i>
         </p>
         <p id="drag">Drag the marker to your approximate location, then click the 'Save' button</p>
-        <button id="locationSave">Save</button>
+        <form action="{{url_for('editlocation', id=user.id)}}" method="POST" id='location-form'>
+          {{ locationForm.csrf_token }}
+          {{ locationForm.lat(id='lat') }}
+          {{ locationForm.lng(id='lng') }}
+          {{ locationForm.loc(id='loc') }}
+          <button id="locationSave">Save</button>
+        </form>
         <button id="locationCancel">Cancel</button>
         {% else %}
         </p>
@@ -160,7 +166,7 @@
 </footer>
 <script>
     function initMap() {
-        var uluru = {lat: 37.7749, lng: -122.4194};
+        var uluru = {lat: {{user2.lat}}, lng: {{user2.lng}} };
         var map = new google.maps.Map(document.getElementById('map'), {
           zoom: 14,
           center: uluru,
@@ -189,12 +195,16 @@
           $('#locationCancel').hide()
           marker.setDraggable(false)
           marker.setPosition(uluru)
+          $('#lat').val('')
+          $('#lng').val('')
           geocodePosition(marker.getPosition())
           map.setCenter(uluru)
         })
           google.maps.event.addListener(marker, 'dragend',function(){
             // console.log(marker)
+              $('#lat').val(marker.getPosition().lat())
               console.log(marker.getPosition().lat());
+              $('#lng').val(marker.getPosition().lng())
               console.log(marker.getPosition().lng());
               geocodePosition(marker.getPosition())
             });
@@ -222,16 +232,18 @@
               }) 
               if (!city && !state){
                 $('#location').text(country)
+                $('#loc').val(country)
 
               }
               else if (!city){
                 console.log(state + ', ' + country)
                 $('#location').text(state + ', ' + country)
+                $('#loc').val(state + ', ' + country)
               }
               else{
                 console.log(city + ', ' + state)
                 $('#location').text(city + ', ' + state)
-
+                $('#loc').val(city + ', ' + state)
               }
                 $("#mapSearchInput").val(results[0].formatted_address);
                 console.log('ocean test', results[0])

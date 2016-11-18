@@ -1,7 +1,7 @@
 from flask import Flask, redirect, url_for, render_template, request, flash, session
 from flask_bcrypt import Bcrypt
 import os
-from forms import SignUpForm, LogInForm, TradeForm, RateForm, BioForm, ImageForm, DeleteForm, EmailForm
+from forms import SignUpForm, LogInForm, TradeForm, RateForm, BioForm, ImageForm, DeleteForm, EmailForm, LocationForm
 from flask_wtf import CsrfProtect
 import datetime
 from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user
@@ -42,9 +42,11 @@ class User(db.Model, UserMixin):
     cred = db.Column(db.Integer)
     games = db.relationship('Game', backref='users', lazy='dynamic')
     ratings = db.relationship('Rating', backref='rating', lazy='dynamic')
+    lat = db.Column(db.Float)
+    lng = db.Column(db.Float)
 
 
-    def __init__(self, username, password, email, date_joined, bio=None, location="San Francisco, CA", image="../static/images/crash.jpg", cred=0):
+    def __init__(self, username, password, email, date_joined, bio=None, location="San Francisco, CA", image="../static/images/crash.jpg", cred=0, lat=37.7749, lng= -122.4194):
      self.username =username
      self.password = bcrypt.generate_password_hash(password).decode('utf-8')
      self.email = email
@@ -53,6 +55,8 @@ class User(db.Model, UserMixin):
      self.location = location
      self.image = image
      self.cred = cred
+     self.lat = lat
+     self.lng = lng
 
 from models.games import Game
 from models.rating import Rating
@@ -200,6 +204,21 @@ def editemail(id):
   flash('Error: Invalid Email Address')
   return redirect(url_for('show', id=user.id))
 
+@app.route('/users/<int:id>/editlocation', methods=['POST'])
+@login_required
+def editlocation(id):
+  user = User.query.get(session['user_id'])
+  locationForm = LocationForm()
+  if locationForm.validate_on_submit():
+    user.lat = locationForm.lat.data
+    user.lng = locationForm.lng.data
+    user.location = locationForm.loc.data
+    db.session.commit()
+    flash('Location Sucessfully Updated')
+    return redirect(url_for('show', id=user.id))
+  flash('Previous Location Saved')
+  return redirect(url_for('show', id=user.id))
+
 @app.route('/users/<int:id>/deletegame', methods=['POST'])
 @login_required
 def deletegame(id):
@@ -275,6 +294,7 @@ def show(id):
   bioForm = BioForm()
   imgForm = ImageForm()
   emailForm = EmailForm()
+  locationForm = LocationForm()
   r='Not Rated'
   try:
     user2 = User.query.get(id)
@@ -292,7 +312,7 @@ def show(id):
   if (len(user_rating) > 0):
     r = round(sum(user_rating)/len(user_rating), 2)
   games = Game.query.all()
-  return render_template('users/show.html',user=user, user2=user2, games=games, form=form, r=r, bioForm=bioForm, imgForm=imgForm, delForm=delForm, emailForm=emailForm)
+  return render_template('users/show.html',user=user, user2=user2, games=games, form=form, r=r, bioForm=bioForm, imgForm=imgForm, delForm=delForm, emailForm=emailForm, locationForm=locationForm)
 
 @app.route('/logout')
 @login_required

@@ -40,4 +40,8 @@ class DeleteForm(Form):
 
 class EmailForm(Form):
   email = StringField('Email', validators=[Email()])
-  
+
+class LocationForm(Form):
+  lat = HiddenField('lat', validators=[DataRequired()])
+  lng = HiddenField('lng', validators=[DataRequired()])
+  loc = HiddenField('loc', validators=[DataRequired()])
