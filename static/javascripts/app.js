@@ -62,7 +62,7 @@ $('.searchForm').on('submit', function(e){
                 }
             })
             var platformInputs = platforms.map(function(system, index){
-                return '<label id="'+system.split(' ').join('')+ '"><input type="radio" name="platform" value='+system.replace(/ /,"-") + '>' + system + '</label>'
+                return '<label id="'+system.split(' ').join('')+ '"><input type="radio" name="platform" required value='+system.replace(/ /,"-") + '>' + system + '</label>'
             })
             $('.games').append(
                 '<div class="game"> <p>' + title + '</p> <div class="gameCover"> <p class="gameId" style="display:none">' + id + '</p>' +
