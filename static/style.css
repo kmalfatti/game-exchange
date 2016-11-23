@@ -902,7 +902,7 @@ hr{
 }
 
 .inputs{
-  margin-left: 7px;
+  margin: -10px 0 0 7px;
 }
 
 .inputs label{

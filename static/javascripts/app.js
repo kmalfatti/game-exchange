@@ -69,8 +69,8 @@ $('.searchForm').on('submit', function(e){
                 '<img src=https://res.cloudinary.com/igdb/image/upload/t_cover_big/' + image + '.jpg> </div>' +
                 '<div class="gameDesc"> <p><b>Summary:</b> ' + summary + '</p>' + 
                 '<p><b>Rating:</b> ' + rating + '</p>' + 
-                '<p><b>Release Date:</b> ' + Number(release_date.getMonth()+1) +'/'+ release_date.getDate() +'/'+ release_date.getFullYear() + '</p>' + 
-                '<form id="addGameForm" action="/search" method="POST"><div class="inputs">'+ platformInputs.join('') + '</div><div class="buttons"> <input type="submit" id="own" name="action" value="I own it!">' + '<input type="submit" id="want" name="action" value="I want it!"></div>' +
+                '<p><b>Release Date:</b> ' + Number(release_date.getMonth()+1) +'/'+ release_date.getDate() +'/'+ release_date.getFullYear() + '</p>' + '<p><b>Select Platform:</b></p>'+
+                '<form id="addGameForm" action="/search" method="POST"><div class="inputs">'+ platformInputs.sort().join('') + '</div><div class="buttons"><input type="submit" id="own" name="action" value="I own it!">' + '<input type="submit" id="want" name="action" value="I want it!"></div>' +
                 '<input id="csrf_token" name="csrf_token" type="hidden" value="' + csrftoken + '">' + '<input type="hidden" name="name" value="'+ title + '">' + '<input type="hidden" name="image" value="'+ image + '">' +
                 '<input type="hidden" name="game_id" value="'+ id + '">' + 
                 '</form>' +'</div>' + '</div> <hr>'
