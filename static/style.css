@@ -829,8 +829,8 @@ text-align: center;
   max-width: 170px;
   padding-top: 3px;
   font-size: 0.9rem;
+  cursor: pointer;
 }
-
 
 .games{
   background-color: rgb(240,240,240);
@@ -897,7 +897,41 @@ hr{
   width: 100%
 }
 
+.buttons *{
+  cursor: pointer;
+}
 
+.inputs{
+  margin-left: 7px;
+}
+
+.inputs label{
+  display: inline-block;
+  margin: 0px 5px 5px 5px;
+  padding: 3px 5px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.inputs label *{
+  display: none;
+}
+
+#Playstation3, #Playstation4{
+  border: 1px solid rgb(0, 94, 184);
+}
+
+#Xbox360, #XboxOne{
+  border: 1px solid green;
+}
+
+#Wii, #WiiU{
+  border: 1px solid gray; 
+}
+
+#Other{
+  border: 1px solid black;
+}
 
 /*==================*/
 /*    END Search    */
@@ -980,4 +1014,7 @@ hr{
 .error-user{
   max-width: 300px;
 }
+
+
+
 

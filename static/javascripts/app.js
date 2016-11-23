@@ -20,6 +20,9 @@ $('.searchForm').on('submit', function(e){
                 '<p>Please try again later.</p>'
                 ).show('slow')
             $('footer').css({position:'absolute',bottom: 0})
+        },
+        complete: function(){
+            $.getScript("/static/javascripts/search.js")
         }
     }).done(function(data){
         var csrftoken = $('meta[name=csrf-token]').attr('content')
@@ -50,7 +53,7 @@ $('.searchForm').on('submit', function(e){
                     platforms.push('Xbox 360')
                 } else if (item.platform === 49 && platforms.indexOf('Xbox One') === -1){
                     platforms.push('Xbox One')
-                } else if (item.platform === 3 && platforms.indexOf('Wii') === -1){
+                } else if (item.platform === 5 && platforms.indexOf('Wii') === -1){
                     platforms.push('Wii')
                 } else if (item.platform === 41 && platforms.indexOf('Wii U') === -1){
                     platforms.push('Wii U')
@@ -59,7 +62,7 @@ $('.searchForm').on('submit', function(e){
                 }
             })
             var platformInputs = platforms.map(function(system, index){
-                return '<input type="radio" id='+system.split(' ').join('')+' name="platform" value='+system.replace(/ /,"-") + '>' + system
+                return '<label id="'+system.split(' ').join('')+ '"><input type="radio" name="platform" value='+system.replace(/ /,"-") + '>' + system + '</label>'
             })
             $('.games').append(
                 '<div class="game"> <p>' + title + '</p> <div class="gameCover"> <p class="gameId" style="display:none">' + id + '</p>' +
@@ -253,6 +256,7 @@ $('.locationDiv').mouseleave(function(){
 //     $('#drag').fadeToggle('show')
 //     google.maps.Marker.setDraggable(true)
 // })
+
 
 $(document).ready(function(){
     var path=window.location.pathname
