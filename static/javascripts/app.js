@@ -66,7 +66,7 @@ $('.searchForm').on('submit', function(e){
             })
             $('.games').append(
                 '<div class="game"> <p>' + title + '</p> <div class="gameCover"> <p class="gameId" style="display:none">' + id + '</p>' +
-                '<img src=https://res.cloudinary.com/igdb/image/upload/t_cover_big/' + image + '.jpg> </div>' +
+                '<img src=https://images.igdb.com/igdb/image/upload/t_cover_big/' + image + '.jpg> </div>' +
                 '<div class="gameDesc"> <p><b>Summary:</b> ' + summary + '</p>' + 
                 '<p><b>Rating:</b> ' + rating + '</p>' + 
                 '<p><b>Release Date:</b> ' + Number(release_date.getMonth()+1) +'/'+ release_date.getDate() +'/'+ release_date.getFullYear() + '</p>' + '<p><b>Select Platform:</b></p>'+
