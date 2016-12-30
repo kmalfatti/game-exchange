@@ -17,3 +17,8 @@ $("label input").on("click",function(){
       $(this).parent().css('background', 'linear-gradient(to right, black, rgb(80, 80, 80)')
     }
 });
+
+$(document).ready(function(){
+  $('.games > hr:last-child').hide()
+  $('.games > hr:first-child').show()
+})

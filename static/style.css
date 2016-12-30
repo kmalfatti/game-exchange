@@ -572,10 +572,6 @@ text-align: center;
   width: 95%;
 }
 
-#gameHr{
-  clear: both;
-}
-
 .gameList p{
   margin: 5px 0;
 }
@@ -879,9 +875,6 @@ hr{
   margin-top: 20px;
 }
 
-.games hr:last-child{
-  display: none
-}
 
 @media (max-width: 650px) {
   .gameCover{
